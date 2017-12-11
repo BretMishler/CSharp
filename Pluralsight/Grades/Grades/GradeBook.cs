@@ -41,6 +41,8 @@ namespace Grades
             grades.Add(grade);
         }
 
+        public string Name;
+
         // <> is generic type syntax
         private List<float> grades;
 

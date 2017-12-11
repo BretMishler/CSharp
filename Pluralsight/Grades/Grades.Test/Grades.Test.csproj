@@ -15,4 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Grades\Grades.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Types\" />
+  </ItemGroup>
 </Project>
