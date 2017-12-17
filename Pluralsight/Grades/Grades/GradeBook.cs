@@ -8,6 +8,7 @@ namespace Grades
         // ctor
         public GradeBook()
         {
+            _name = "Empty";
             grades = new List<float>();
         }
 
@@ -41,7 +42,36 @@ namespace Grades
             grades.Add(grade);
         }
 
-        public string Name;
+        // we made this field because we wanted to edit the setter to make sure
+        // that people couldnt make it null. But because we edited the setter,
+        // the getter needs to explicitel pass back something
+        private string _name;
+        public string Name
+        {
+            get
+            {
+                return _name; // could return a substring if we wanted
+            }
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    // here we make a delegate that will let us know when
+                    // the name is changed
+                    if(_name != value)
+                    {
+                        NameChangedEventArgs args = new NameChangedEventArgs();
+                        args.ExistingName = _name;
+                        args.NewName = value;
+
+                        NameChanged(this, args);
+                    }
+                    _name = value;
+                }  
+            }
+        }
+
+        public event NameChangedDelegate NameChanged;
 
         // <> is generic type syntax
         private List<float> grades;
