@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 // value inside of book is copied and placed inside book 2 (commnented out below)
 // by value we mean pointer
@@ -105,6 +106,28 @@
 // EVENTS (part 2)
 // Events are based on and use delegates
 
+// TRY CATCH
+// try { ComputeStatistics(); }
+// catch(DivideByZeroExceptione ex){ ... }
+// how this works is that if an exception is thrown inside ComputeStatistics,
+// the program will go looking for the NEAREST catch with the exception thrown
+// in this case, IF a DivideByZeroException occurs, then code inside will be executed
+// if not, then it's uncaught. 
+// can tie up more than one exception, chain catch blocks
+
+// CHAINING CATCH BLOCKS
+// try { ... }
+// catch(DivideByZeroException ex){}
+// catch(Exception ex){}
+// Exception catches everything
+// IF YOU HANDLE AN EXCEPTION THAT MAYBE YOU SHOULDNT HAVE HANDLED...
+// keep in mind that the PROGRAM WILL NOT TERMINATE
+// so be careful
+
+// FINALLY
+// executes even when control jumps out of scope
+// good for cleaning up resources and such
+
 namespace Grades
 {
     class Program
@@ -114,41 +137,78 @@ namespace Grades
             //behind the scenes a constructor method is being invoked so () required
             GradeBook book = new GradeBook();
 
+            GetBookName(book);
+            AddGrades(book);
+            SaveGrades(book);
+            WriteResults(book);
+        }
+
+        private static void WriteResults(GradeBook book)
+        {
+            GradeStatistics stats = book.ComputeStatistics();
+
+            // cw tab tab for console.writeLine();
+            //Console.WriteLine(book.Name);
+            WriteResult("Average", stats.AverageGrade);
+            WriteResult("Highest", stats.HighestGrade);
+            WriteResult("Lowest", stats.LowestGrade);
+            //WriteResult("Params Example", stats.LowestGrade, 2, 3, 4);
+            WriteResult(stats.Description, stats.LetterGrade);
+        }
+
+        private static void SaveGrades(GradeBook book)
+        {
+            using (StreamWriter outputFile = File.CreateText("grades.txt"))
+            {
+                book.WriteGrades(outputFile);
+            }
+        }
+
+        private static void AddGrades(GradeBook book)
+        {
+            book.AddGrade(91);
+            book.AddGrade(89.5f);
+            book.AddGrade(75);
+        }
+
+        private static void GetBookName(GradeBook book)
+        {
+            try
+            {
+                Console.WriteLine("Enter a name");
+                book.Name = Console.ReadLine();
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            //catch(NullReferenceException ex)
+            //{
+            //    Console.WriteLine("Something went wrong!");
+            //}
+
             // += to add up delegates onto this or esle only the last
             // assigned delegate will be in effect
             // can also use -= if you want to remove a delegate
             //book.NameChanged += new NameChangedDelegate(OnNameChanged);
             //book.NameChanged += new NameChangedDelegate(OnNameChanged2);
             // prefered version
-            book.NameChanged += OnNameChanged;
+            //book.NameChanged += OnNameChanged;
 
-            book.Name = "Bret's Grade Book";
-            book.Name = "Grade Book";
-            book.Name = null;
-            book.AddGrade(91);
-            book.AddGrade(89.5f);
-            book.AddGrade(75);
-
-
-            GradeStatistics stats = book.ComputeStatistics();
-
-            // cw tab tab for console.writeLine();
-            Console.WriteLine(book.Name);
-            WriteResult("Average", stats.AverageGrade);
-            WriteResult("Highest", (int)stats.HighestGrade);
-            WriteResult("Lowest", stats.LowestGrade);
-            WriteResult("Params Example", stats.LowestGrade, 2, 3, 4);
+            //book.Name = "Bret's Grade Book";
+            //book.Name = "Grade Book";
+            //book.Name = null;
         }
 
-        static void OnNameChanged(object send, NameChangedEventArgs args)
-        {
-            Console.WriteLine($"Grade book changing name from {args.ExistingName} to {args.NewName}");
-        }
+        //static void OnNameChanged(object send, NameChangedEventArgs args)
+        //{
+        //    Console.WriteLine($"Grade book changing name from {args.ExistingName} to {args.NewName}");
+        //}
 
-        static void WriteResult(string description, int result)
-        {
-            Console.WriteLine(description + ": " + result);
-        }
+        //static void WriteResult(string description, int result)
+        //{
+        //    Console.WriteLine(description + ": " + result);
+        //}
 
         static void WriteResult(string description, float result)
         {
@@ -157,11 +217,17 @@ namespace Grades
         }
 
         //example of passing in multiple items
-        static void WriteResult(string description, params float[] result)
+        //static void WriteResult(string description, params float[] result)
+        //{
+        //    foreach(var r in result) {
+        //        Console.WriteLine(description + ": " + r);
+        //    }
+        //}
+
+        static void WriteResult(string description, string result)
         {
-            foreach(var r in result) {
-                Console.WriteLine(description + ": " + r);
-            }
+            Console.WriteLine($"{description}: {result}", description, result);
+            // there are other format options like {1:C}
         }
     }
 }

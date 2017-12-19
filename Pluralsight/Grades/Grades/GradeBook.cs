@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Grades
 {
@@ -46,6 +47,7 @@ namespace Grades
         // that people couldnt make it null. But because we edited the setter,
         // the getter needs to explicitel pass back something
         private string _name;
+
         public string Name
         {
             get
@@ -54,20 +56,22 @@ namespace Grades
             }
             set
             {
-                if (!string.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    // here we make a delegate that will let us know when
-                    // the name is changed
-                    if(_name != value)
-                    {
-                        NameChangedEventArgs args = new NameChangedEventArgs();
-                        args.ExistingName = _name;
-                        args.NewName = value;
+                    throw new ArgumentException("Name cannot be null or empty.");
+                }
 
-                        NameChanged(this, args);
-                    }
-                    _name = value;
-                }  
+                // here we make a delegate that will let us know when
+                // the name is changed
+                if(_name != value && NameChanged != null)
+                {
+                    NameChangedEventArgs args = new NameChangedEventArgs();
+                    args.ExistingName = _name;
+                    args.NewName = value;
+
+                    NameChanged(this, args);
+                }
+                _name = value;
             }
         }
 
@@ -75,6 +79,14 @@ namespace Grades
 
         // <> is generic type syntax
         private List<float> grades;
+
+        public void WriteGrades(TextWriter destination)
+        {   // gonna write in reverse
+            for (int i = grades.Count; i > 0; i--)
+            {
+                destination.WriteLine(grades[i-1]);
+            }
+        }
 
         // if undeclared, private is default access modifier
 
