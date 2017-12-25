@@ -128,24 +128,100 @@ using System.IO;
 // executes even when control jumps out of scope
 // good for cleaning up resources and such
 
+// POLYMORPHISM
+// one variable can point to many different types of objects
+// objects can behave differently depending on their type
+// unless a base class is described, all base classes for objects is System.Obj
+// 
+// Imagine you have a class A and a class B : A
+// and a function foo(A bar)
+// true polymorphism means I should be able to 
+// A x = new B();
+// and call foo(x), even though the param type is A, we should be able to pass
+// in children of A like B.
+
+// VIRTUAL
+// Put this on a parent class method where the child class has
+// a method with the same name. The parent method will have virtual
+// the child method will have override
+
+// OVERRIDE
+// without override, if class A and B:A BOTH have a method called X
+// when X is called, it will always be A's version of the method
+// A example1 = new B();
+// B example2 = new B();
+//
+// both will use A's version of a method called X.
+//
+// you can even override .NET base class methods if you wish
+
+// INHERITANCE and POLYMORPHISM
+// are overrated techniques for code reuse
+// inheritence can make software harder to understand and write
+// we can reduce the amount of rigidity in inheritance with 
+// abstract classes or interfaces
+
+// ABSTRACT
+// abstract class cannot be instantiated because it is not fully implemeted
+// abstract methods are implicitely virtual, so child classes with methods of
+// the same (abstract) name will need to be override
+// We cant do things like "return new GradeTracker" because its not a concrete
+// class, it's abstract
+
+// INTERFACES
+// contains no implementation details
+// defines only the signatures of methods, events, and properties
+// use captital I
+// 
+// a type can implement muliple interfaces
+// any object that implements an interface is guarenteed to have the membvers
+// that an interface describes
+//
+// In some ways Interface is like an Abstract type because in order to create
+// a concrete class that implements this interface, you msut implement the
+// members inside.
+// BUT
+// When you define a class, can only inhgerit from a single base class
+// BUT you can implement as many interfaces as you like 
+// CAN ALSO implement from 1 base classes and N interfaces
+//
+// Ultimate abstraction because you can define the API your software needs w/out
+// having to define any of the implementation details
+
+// ABSTRACT classes can be a bit rigid and make for a complicated inheritance
+// tree. 
+
+// NO ACCESS MODIFIERS IN INTERFACE because interface classes must have access
+// to all methods
+
 namespace Grades
 {
     class Program
     {
         static void Main(string[] args)
         {
-            //behind the scenes a constructor method is being invoked so () required
-            GradeBook book = new GradeBook();
+            IGradeTracker book = CreateGradeBook();
 
-            GetBookName(book);
+            //GetBookName(book);
             AddGrades(book);
             SaveGrades(book);
             WriteResults(book);
         }
 
-        private static void WriteResults(GradeBook book)
+        private static IGradeTracker CreateGradeBook()
+        {
+            //behind the scenes a constructor method is being invoked so () required
+            return new ThrowAwayGradeBook();
+        }
+
+        private static void WriteResults(IGradeTracker book)
         {
             GradeStatistics stats = book.ComputeStatistics();
+
+            foreach (float grade in book)
+            {
+                Console.WriteLine(grade);
+            }
 
             // cw tab tab for console.writeLine();
             //Console.WriteLine(book.Name);
@@ -156,7 +232,7 @@ namespace Grades
             WriteResult(stats.Description, stats.LetterGrade);
         }
 
-        private static void SaveGrades(GradeBook book)
+        private static void SaveGrades(IGradeTracker book)
         {
             using (StreamWriter outputFile = File.CreateText("grades.txt"))
             {
@@ -164,14 +240,14 @@ namespace Grades
             }
         }
 
-        private static void AddGrades(GradeBook book)
+        private static void AddGrades(IGradeTracker book)
         {
             book.AddGrade(91);
             book.AddGrade(89.5f);
             book.AddGrade(75);
         }
 
-        private static void GetBookName(GradeBook book)
+        private static void GetBookName(IGradeTracker book)
         {
             try
             {

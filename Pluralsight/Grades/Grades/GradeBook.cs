@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
 namespace Grades
 {
-    public class GradeBook
+    public class GradeBook : GradeTracker
     {
         // ctor
         public GradeBook()
@@ -13,8 +14,10 @@ namespace Grades
             grades = new List<float>();
         }
 
-        public GradeStatistics ComputeStatistics()
+        public override GradeStatistics ComputeStatistics()
         {
+            Console.WriteLine("GradeBook::ComputeStatistics");
+
             GradeStatistics stats = new GradeStatistics();
 
             float sum = 0;
@@ -38,49 +41,20 @@ namespace Grades
         // class members broadly fall into two classes:
         // 1. state
         // 2. behavior
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
             grades.Add(grade);
         }
 
-        // we made this field because we wanted to edit the setter to make sure
-        // that people couldnt make it null. But because we edited the setter,
-        // the getter needs to explicitel pass back something
-        private string _name;
-
-        public string Name
+        public override IEnumerator GetEnumerator()
         {
-            get
-            {
-                return _name; // could return a substring if we wanted
-            }
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentException("Name cannot be null or empty.");
-                }
-
-                // here we make a delegate that will let us know when
-                // the name is changed
-                if(_name != value && NameChanged != null)
-                {
-                    NameChangedEventArgs args = new NameChangedEventArgs();
-                    args.ExistingName = _name;
-                    args.NewName = value;
-
-                    NameChanged(this, args);
-                }
-                _name = value;
-            }
+            return grades.GetEnumerator();
         }
 
-        public event NameChangedDelegate NameChanged;
-
         // <> is generic type syntax
-        private List<float> grades;
+        protected List<float> grades;
 
-        public void WriteGrades(TextWriter destination)
+        public override void WriteGrades(TextWriter destination)
         {   // gonna write in reverse
             for (int i = grades.Count; i > 0; i--)
             {
