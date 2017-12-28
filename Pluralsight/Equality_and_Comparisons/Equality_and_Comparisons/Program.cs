@@ -9,12 +9,12 @@ namespace Equality_and_Comparisons
 
         static void Main(string[] args)
         {
-            Food banana = new Food("banana");
-            Food banana2 = new Food("banana");
-            Food chocolate = new Food("chocolate");
+            string banana = "banana";
+            string banana2 = string.Copy(banana);
 
-            Console.WriteLine(banana.Equals(chocolate));
-            Console.WriteLine(banana.Equals(banana2));
+            Console.WriteLine(banana);
+            Console.WriteLine(banana2);
+            Console.WriteLine(banana.Equals((object)banana2));
         }
     }
 }
