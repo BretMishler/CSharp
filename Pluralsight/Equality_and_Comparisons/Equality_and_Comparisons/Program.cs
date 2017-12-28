@@ -28,15 +28,27 @@ namespace Equality_and_Comparisons
         // have two static types. Equals and ReferenceEquals
         // and iEquatable of <T> interface   
 
+        // STATIC
+        // static methods are never overridable 
+
+        // BOXING
+        // process of converting a value type to the type [object]
+        // or to any interface by this value type
+        // When the CLR boxes a value type, it wraps the value
+        // inside a System.Object and stores it on the managed heap
+
+        // IEquatable<T>
+        // can be exposed to any type that wants to provide a strongly-typed
+        // Equals. Which means for value types , no boxing!
+
         static void Main(string[] args)
         {
-            string banana = "banana";
-            string banana2 = string.Copy(banana);
+            int three = 3;
+            int threeAgain = 3;
+            int four = 4;
 
-            Console.WriteLine(banana);
-            Console.WriteLine(banana2);
-            Console.WriteLine(ReferenceEquals(banana, banana2));
-            Console.WriteLine(banana.Equals((object)banana2));
+            Console.WriteLine(three.Equals(threeAgain));
+            Console.WriteLine(three.Equals(four));
         }
     }
 }
