@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Equality_and_Comparisons
 {
-    public struct Food
+    public class Food
     {
         private string _name;
 
@@ -16,7 +16,5 @@ namespace Equality_and_Comparisons
         {
             return _name;
         }
-
-
     }
 }
