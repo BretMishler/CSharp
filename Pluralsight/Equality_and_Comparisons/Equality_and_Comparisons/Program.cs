@@ -30,14 +30,13 @@ namespace Equality_and_Comparisons
 
         static void Main(string[] args)
         {
-            Food banana = new Food("banana");
-            Food banana2 = new Food("banana");
-            Food chocolate = new Food("chocolate");
+            string banana = "banana";
+            string banana2 = string.Copy(banana);
 
-            //Console.WriteLine(banana.Equals(null));
-            Console.WriteLine(object.Equals(banana, null));
-            Console.WriteLine(object.Equals(null, banana));
-            Console.WriteLine(object.Equals(null, null));
+            Console.WriteLine(banana);
+            Console.WriteLine(banana2);
+            Console.WriteLine(ReferenceEquals(banana, banana2));
+            Console.WriteLine(banana.Equals((object)banana2));
         }
     }
 }
