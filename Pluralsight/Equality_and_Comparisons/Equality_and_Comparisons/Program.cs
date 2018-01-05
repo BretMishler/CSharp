@@ -79,6 +79,19 @@ namespace Equality_and_Comparisons
             // if we dont do string.Equals(object)string, compiler would have
             // picked strongly typed IEquatable<string>, aka
             // string's implementation of IEquatable<T>
+
+            Console.WriteLine("Operator: " + AreIntsEqualOp(3, 3));
+            Console.WriteLine("Method: " + AreIntsEqualMethod(3, 3));
+        }
+
+        static bool AreIntsEqualOp(int x, int y)
+        {
+            return x == y;
+        }
+
+        static bool AreIntsEqualMethod(int x, int y)
+        {
+            return x.Equals(y);
         }
     }
 }
