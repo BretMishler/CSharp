@@ -93,5 +93,10 @@ namespace Equality_and_Comparisons
         {
             return x.Equals(y);
         }
+
+        static bool AreButtonsEqualOp(Button x, Button y)
+        {
+            return x == y;
+        }
     }
 }
