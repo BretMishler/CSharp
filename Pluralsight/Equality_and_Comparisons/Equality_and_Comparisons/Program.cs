@@ -80,10 +80,18 @@ namespace Equality_and_Comparisons
             // picked strongly typed IEquatable<string>, aka
             // string's implementation of IEquatable<T>
 
+            Console.WriteLine("\n== for Integers");
             Console.WriteLine("Operator: " + AreIntsEqualOp(3, 3));
             Console.WriteLine("Method: " + AreIntsEqualMethod(3, 3));
-        }
 
+            Console.WriteLine("\n== for Strings");
+            string str1 = "Click me now!";
+            string str2 = string.Copy(str1);
+            Console.WriteLine("Reference: " + ReferenceEquals(str1, str2));
+            Console.WriteLine("Operator: " + AreStringsEqualOp(str1, str2));
+            Console.WriteLine("Method: " + AreStringsEqualMethod(str1, str2));
+        }
+         
         static bool AreIntsEqualOp(int x, int y)
         {
             return x == y;
@@ -94,9 +102,14 @@ namespace Equality_and_Comparisons
             return x.Equals(y);
         }
 
-        static bool AreButtonsEqualOp(Button x, Button y)
+        static bool AreStringsEqualOp(string x, string y)
         {
             return x == y;
         }
+
+        static bool AreStringsEqualMethod(string x, string y)
+        {
+            return x.Equals(y);
+        }
     }
-}
+} 
