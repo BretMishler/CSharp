@@ -90,6 +90,9 @@ namespace Equality_and_Comparisons
             Console.WriteLine("Reference: " + ReferenceEquals(str1, str2));
             Console.WriteLine("Operator: " + AreStringsEqualOp(str1, str2));
             Console.WriteLine("Method: " + AreStringsEqualMethod(str1, str2));
+
+            // point here w/ strings is that the equality operator indeeds
+            // tests the value, not reference, just as object.Equals does
         }
          
         static bool AreIntsEqualOp(int x, int y)
