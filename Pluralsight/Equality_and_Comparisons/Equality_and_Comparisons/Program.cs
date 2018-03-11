@@ -22,7 +22,7 @@ namespace Equality_and_Comparisons
 
         // REFERENCE
         // variables that are reference types are considered to be equal 
-        // only if they refer to the same instance
+        // only if they refer to the same instance (same place in memory)
 
         // OBJECTS
         // have two static types. Equals and ReferenceEquals
@@ -39,7 +39,8 @@ namespace Equality_and_Comparisons
 
         // IEquatable<T>
         // can be exposed to any type that wants to provide a strongly-typed
-        // Equals. Which means for value types , no boxing!
+        // Equals. Which means for value types , no boxing! (since boxing to obj
+        // would mean an attempt to do a reference check)
         // EXTREMELY USEFUL FOR VALUE TYPES
         // Not so useful for reference types
 
@@ -66,8 +67,26 @@ namespace Equality_and_Comparisons
         // iEquatable<T> to provide a strongly-typed Equals method that avoids
         // boxing for value types
 
+        // NATURAL COMPARING INTERFACES
+        // IEquatable<T> for equality
+        // IComparable<T> for comparisons
+
+        // PLUGGED-IN COMPARING INTERFACES
+        // IEqualityComprer<T> for equality
+        // IComparer<T> for comparisons
+
+        // DONT DO QUALITY COMPARISONS ON FLOATING POINTS
+        // 6.0000000f == 6.0000001f => false  ....
+        // x=5.05f, y=0.95f, 6 == (x+y) => false .... 
+
+        // obj.Equals() is not type safe!
+        // class Object { virtual bool Equals (object obj) }
+        // the parameter will take any object and try to do comparisons on the
+        // two! It wont warn ya and can cause a lot of bugs
+
         static void Main(string[] args)
         {
+
             int three = 3;
             int threeAgain = 3;
             int four = 4;
