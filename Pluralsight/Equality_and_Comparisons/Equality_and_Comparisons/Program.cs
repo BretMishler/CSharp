@@ -11,8 +11,9 @@ namespace Equality_and_Comparisons
         // by default, object.Equals() compares values for structs
         // instead of by ref for classes
         //
-        // Derive from System.ValueType, which derives from System.Object
-        // BUT ValueType.Equals() overrides Object.Equals()
+        // STRUCTS and ALL OTHER VALUE TYPES derive from System.ValueType, 
+        // which derives from System.Object
+        // BUT ValueType.Equals() overrides the virtual object.Equals()
         // The override for structs goes through all the fields of the
         // ValueType, calling Equals against each one until a field is !=
         //
@@ -68,7 +69,7 @@ namespace Equality_and_Comparisons
         // boxing for value types
 
         // NATURAL COMPARING INTERFACES
-        // IEquatable<T> for equality
+        // IEquatable<T> for equality, great for val, not good for ref
         // IComparable<T> for comparisons
 
         // PLUGGED-IN COMPARING INTERFACES
@@ -83,6 +84,12 @@ namespace Equality_and_Comparisons
         // class Object { virtual bool Equals (object obj) }
         // the parameter will take any object and try to do comparisons on the
         // two! It wont warn ya and can cause a lot of bugs
+
+        // string class has its own Equals() that overrides C#'s 
+        // virtual obj.Equals()
+        // string has several overrides, one where you can pass it a param of
+        // type obj and it will make sure to do a ref compare, not value
+        // string1.Equals((obj)string2)
 
         static void Main(string[] args)
         {
