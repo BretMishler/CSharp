@@ -8,4 +8,7 @@
   <ItemGroup>
     <Compile Remove="IntExample.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Notes\" />
+  </ItemGroup>
 </Project>

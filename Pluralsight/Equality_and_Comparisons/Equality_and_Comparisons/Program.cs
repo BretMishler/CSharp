@@ -93,7 +93,66 @@ namespace Equality_and_Comparisons
 
         static void Main(string[] args)
         {
+            //Part_1_2();
+            Part3();
+        }
 
+        static void Part3()
+        {
+            Console.WriteLine("\n== for Integers");
+            Console.WriteLine("Operator: " + AreIntsEqualOp(3, 3));
+            Console.WriteLine("Method  : " + AreIntsEqualMethod(3, 3));
+
+            Console.WriteLine("\n== for Strings");
+            string str1 = "Click me now!";
+            string str2 = string.Copy(str1);
+            Console.WriteLine("Reference: " + ReferenceEquals(str1, str2));
+            Console.WriteLine("Operator : " + AreStringsEqualOp(str1, str2));
+            Console.WriteLine("Method   : " + AreStringsEqualMethod(str1, str2));
+
+            // point here w/ strings is that the equality operator indeeds
+            // tests the value, not reference, just as object.Equals does
+
+            Tuple<int, int> tuple1 = Tuple.Create(1, 3);
+            Tuple<int, int> tuple2 = Tuple.Create(1, 3);
+
+            Console.WriteLine("\n== for Tuples");
+            Console.WriteLine("Reference: " +
+                             ReferenceEquals(tuple1, tuple2));
+            Console.WriteLine("Method   : " + tuple1.Equals(tuple2));
+            Console.WriteLine("Operator : " + (tuple1 == tuple2));
+
+            // tuples are a ref type!
+            // Microsoft overrides the .Equals to provide a value equality
+            // symantics. But they didnt write an overload for ==
+            // Lecturer agrees that this is VERY confusing
+
+            string str3 = "apple";
+            string str4 = string.Copy(str3);
+
+            Console.WriteLine("\n== Inheritence doesnt always work as expected.");
+            Console.WriteLine("STRINGS");
+            Console.WriteLine("Reference : " + ReferenceEquals(str3, str4));
+            Console.WriteLine("Method    : " + str3.Equals(str4));
+            Console.WriteLine("Operator  : " + (str1 == str2));
+            Console.WriteLine("Static    : " + object.Equals(str1, str2));
+
+            object obj1 = "apple";
+            object obj2 = string.Copy((string)obj1);
+
+            Console.WriteLine("OBJECTS (copying obj1 with cast(string) to ojb2)");
+            Console.WriteLine("Reference : " + ReferenceEquals(obj1, obj2));
+            // obj.Equals overrides for string implementation
+            Console.WriteLine("Method    : " + obj1.Equals(obj2));
+            // == for obj is static so no override
+            Console.WriteLine("Operator  : " + (obj1 == obj2));
+            Console.WriteLine("Static    : " + object.Equals(obj1, obj2));
+
+            // Equality operator is not virtual
+        }
+
+        static void Part_1_2()
+        {
             int three = 3;
             int threeAgain = 3;
             int four = 4;
@@ -105,20 +164,6 @@ namespace Equality_and_Comparisons
             // if we dont do string.Equals(object)string, compiler would have
             // picked strongly typed IEquatable<string>, aka
             // string's implementation of IEquatable<T>
-
-            Console.WriteLine("\n== for Integers");
-            Console.WriteLine("Operator: " + AreIntsEqualOp(3, 3));
-            Console.WriteLine("Method: " + AreIntsEqualMethod(3, 3));
-
-            Console.WriteLine("\n== for Strings");
-            string str1 = "Click me now!";
-            string str2 = string.Copy(str1);
-            Console.WriteLine("Reference: " + ReferenceEquals(str1, str2));
-            Console.WriteLine("Operator: " + AreStringsEqualOp(str1, str2));
-            Console.WriteLine("Method: " + AreStringsEqualMethod(str1, str2));
-
-            // point here w/ strings is that the equality operator indeeds
-            // tests the value, not reference, just as object.Equals does
         }
          
         static bool AreIntsEqualOp(int x, int y)

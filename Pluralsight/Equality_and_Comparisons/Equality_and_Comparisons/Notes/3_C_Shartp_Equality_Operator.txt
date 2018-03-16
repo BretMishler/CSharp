@@ -1,0 +1,53 @@
+﻿== is NOT the same as object.Equals()
+(though often gives the same results)
+
+How to overload an operator:
+public string bool operator == (MyType lhs, MyType rhs)
+{}
+
+string == gets overloaded. It doesnt do the typic CEQ IL instruction, which
+is comparing-for-equality and is rather simple (just compares addresses)
+
+
+So- How does == work with Refernce Types?
+
+== Overload for type? 
+    [YES]   :   Use that overload method 
+    [NO]    :   Compare address with CEQ IL Instruction
+
+
+WEIRD: Microsoft made sure that == and .Equals for strings will always return
+the same thing
+
+Cannot use == on non-primitive Value Types (like a struct you make)
+
+
+
+
+
+
+                            ==      |   Equals()
+                            --------------------
+Primitive Types:                Compare Values (can't overload or override)
+Reference Types:        Compare References (addresses)
+    by default
+Value Types:        Not Available   |   Compares Values (but slow)
+
+
+
+
+== Doesn't always work with inheritance
+== is not virtual- IT'S STATIC
+so inheritence doesn't happen when you cast an obj to string and try to compare
+
+(object)x == (object)y always does the same thing as ReferenceEquals(x, y)
+
+SO- Equals is likely better than == because of this so get in the habit
+
+ANOTHER REASON WHY-
+== never works with Generics!!! Following code won't build:
+
+static void DisplayWhetherArgsEquals<T>(T x, T y)
+    cw("Equal? " + (x==y))
+
+Error: "Operator == cannot be applied to operands of type 'T' and 'T'"
