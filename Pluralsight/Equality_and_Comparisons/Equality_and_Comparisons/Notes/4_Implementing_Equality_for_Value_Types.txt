@@ -1,0 +1,48 @@
+﻿Why Override Equality?
+
+1. Use operator == for your type
+    == won't work for value types unless you overload it. 
+
+ 2. Performance
+    Avoid boxing and reflection!
+
+ 3. Change Meaning of Equality
+    likely not common
+
+
+
+                ~~~ALWAYS DO THE FOLLOWING~~~
+
+1. override object.Equals() to avoid reflection
+    (and object.GetHashCode())
+2. implement IEquatable<FootItem> -> avoids boxing and type safe
+3. implement == 
+    (which means, also implement !=)
+
+                ~~~GOOD PRACTICE IS TO DO ALL THREE~~~
+
+== does value equality for stringds and enums
+
+GetHashCode() returns a 32-bit hash of the value of the object.
+    point is to allow the type to be used as a key in a collection that
+    internally uses a hash table
+
+    Example!!!!!!
+    Dictionary<TKey, TValue>
+        contains/uses a hash table
+
+Hash codes have a requirement: 
+    if 
+        x.Equals(y);
+    then
+        x.GetHashCode() == y.GetHasCode()
+
+Dictionaries wont work properly for this:
+
+If you modify how Equality works, then you need to modify how hash codes work
+
+
+
+
+
+iEqualtable<ValueType> gives us strongly typrs equals method(s)

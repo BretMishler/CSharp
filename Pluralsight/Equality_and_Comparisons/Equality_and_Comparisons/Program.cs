@@ -94,7 +94,82 @@ namespace Equality_and_Comparisons
         static void Main(string[] args)
         {
             //Part_1_2();
-            Part3();
+            //Part3();
+            Part4();
+        }
+
+        public enum FoodGroup { Meat, Fruit, Vegetables, Sweets}
+
+        public struct FoodItem : IEquatable<FoodItem>
+        {
+            // implemented by VS if you ask it to with right-click
+            // interface part
+            public bool Equals(FoodItem other)
+            {
+                // == does value equality for string and enums
+                return this._name == other.Name && this._group == other._group;
+            }
+
+            // because of boxing and casting, IEquatable<T>.Equals() will still
+            // be more effecient
+            public override bool Equals(object obj)
+            {
+                if (obj is FoodItem)
+                    return Equals((FoodItem)obj);
+                else
+                    return false;
+            }
+
+            public static bool operator ==(FoodItem lhs, FoodItem rhs)
+            {
+                // can also do return !(lhs == rhs);
+                return lhs.Equals(rhs);
+            }
+
+            public static bool operator !=(FoodItem lhs, FoodItem rhs)
+            {
+                return !lhs.Equals(rhs);
+            }
+
+			public override int GetHashCode()
+			{
+                // Microsoft has already implemented GetHasCode()
+                // for standard .NET types
+                return _name.GetHashCode() ^ _group.GetHashCode();
+                // ^ is XOR (exclusive OR)
+			}
+
+			private readonly string _name;
+            private readonly FoodGroup _group;
+
+            public string Name { get { return _name; }}
+            public FoodGroup Group { get { return _group; }}
+
+            public FoodItem(string name, FoodGroup group)
+            {
+                this._name = name;
+                this._group = group;
+            }
+
+			public override string ToString()
+			{
+                return _name;
+			}
+		}
+
+        static void Part4()
+        {
+            FoodItem banana = new FoodItem("banana", FoodGroup.Fruit);
+            FoodItem banana2 = new FoodItem("banana", FoodGroup.Fruit);
+            FoodItem chocolate = new FoodItem("banana", FoodGroup.Sweets);
+
+            Console.WriteLine(
+                "banana   == banana2:   " + (banana == banana2));
+            Console.WriteLine(
+                "banana2   == chocolate:   " + (banana2 == chocolate));
+            Console.WriteLine(
+                "chocolate   == banana2:   " + (chocolate == banana));
+            
         }
 
         static void Part3()
