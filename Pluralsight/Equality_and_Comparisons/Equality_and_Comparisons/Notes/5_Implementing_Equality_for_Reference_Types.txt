@@ -1,0 +1,4 @@
+﻿For reference types, you have to deal with inheritence
+    not a problem for VALUE types because everything is implicitely SEALED
+
+Being SEALED impacts how you can implement "equalitty"

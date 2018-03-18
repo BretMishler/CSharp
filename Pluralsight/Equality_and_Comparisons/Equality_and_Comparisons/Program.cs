@@ -95,10 +95,20 @@ namespace Equality_and_Comparisons
         {
             //Part_1_2();
             //Part3();
-            Part4();
+            //Part4();
+            Part5();
         }
 
-        public enum FoodGroup { Meat, Fruit, Vegetables, Sweets}
+        public static void Part5()
+        {
+            Food apple = new Food("apple", FoodGroup.Fruit);
+            CookedFood stewedApple = new CookedFood("stewed", "appke", FoodGroup.Fruit);
+
+            Console.WriteLine(apple);
+            Console.WriteLine(stewedApple);
+        }
+
+        //public enum FoodGroup { Meat, Fruit, Vegetables, Sweets}
 
         public struct FoodItem : IEquatable<FoodItem>
         {
