@@ -102,7 +102,7 @@ namespace Equality_and_Comparisons
         public static void Part5()
         {
             Food apple = new Food("apple", FoodGroup.Fruit);
-            CookedFood stewedApple = new CookedFood("stewed", "appke", FoodGroup.Fruit);
+            CookedFood stewedApple = new CookedFood("stewed", "apple", FoodGroup.Fruit);
 
             Console.WriteLine(apple);
             Console.WriteLine(stewedApple);

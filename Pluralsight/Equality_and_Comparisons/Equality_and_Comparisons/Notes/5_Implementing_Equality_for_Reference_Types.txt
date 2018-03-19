@@ -1,4 +1,46 @@
 ﻿For reference types, you have to deal with inheritence
     not a problem for VALUE types because everything is implicitely SEALED
 
-Being SEALED impacts how you can implement "equalitty"
+Being SEALED impacts how you can implement "equality"
+
+Why Override Equality (Ref Types)?
+    First, theres a good reason NOT to override equality for reference types...
+    Devs know and expect how if(a == b) should work
+
+    You might override equality for...
+
+    STRING WRAPPERS
+        // class that basically wraps a string
+        class FirstName
+        {
+            private string _value;
+
+        // so may want to implement something like
+        if (name1 == name2) {
+
+    MATHEMATICAL TYPES
+        class Vector
+        {
+
+        // might want to be able to use notation like
+        // so may want to implement something like
+        if (vector1 == vector2) {
+
+Alternatively...
+
+    Write an equality comparer for your type instead
+
+    EQUALITY COMPARER
+        IEqualityComparer<T>
+
+        // canse use == for equality with equality comparers
+
+        if (myEqualityComparer.Equals(obj1, obj2));
+
+
+Differences from implementing equality for a VALUE TYPE:
+    Recall for FoodItem value type in last module
+        started by implementing IEquatable<T>.Equals()
+    This time, for ref type
+        we didnt bother implementing IEquatable<T> because its not useful here
+        put equality logic in object.Equals()
