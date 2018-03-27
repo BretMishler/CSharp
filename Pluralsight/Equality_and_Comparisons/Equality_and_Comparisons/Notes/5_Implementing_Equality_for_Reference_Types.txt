@@ -1,4 +1,14 @@
-﻿For reference types, you have to deal with inheritence
+﻿SUMMARY:
+    1. Implementing equality is not appropriate for most reference types
+    2. Procedure for implementing equality:
+        i. Override object.Equals()
+        ii. Override object.GetHashCode()
+        iii. Overload ==
+        iv. Overload !=
+    3. IEquatable<T> only appropriate for sealed types
+    4. Equality logic should go in object.Equals()
+
+For reference types, you have to deal with inheritence
     not a problem for VALUE types because everything is implicitely SEALED
 
 Being SEALED impacts how you can implement "equality"
@@ -52,14 +62,13 @@ DO NOT CHEESE == Operator by doing something like this
         public static bool operator ==(Food x, Food y)
         {
             //return object.Equals(x, y);
-            return this._name == rhs._name && this._group == rhs._group;
+            return x._name == y._name && x._group == y._group;
         }
 WARNING! Even MS Docs get lazy and do the above. Not all of the logic it skips
 when compared with:
 
         public override bool Equals(object obj)
-        {
-            // 'this' cannot equal null 
+        { 
             if (obj == null)
                 return false;
             if (ReferenceEquals(obj, this))
@@ -71,3 +80,106 @@ when compared with:
         }
 
 ?EXAMPLE: DisplayWhetherEqual(stewedApple, bakedApple);
+
+        static void DisplayWhetherEqual(Food food1, Food food2)
+        {
+            if (food1 == food2)
+            {
+                Console.WriteLine(string.Format("{0,12} == {1}", food1, food2));
+            }
+            else
+                Console.WriteLine(string.Format("{0,12} != {1}", food1, food2));
+        }
+
+        This will compre the BASE CLASS, which has no knowledge of the
+            CookingMethod property, which is "stewed" and "baked",
+            respectively. So itll just see "Apple" and "Fruit" for name
+            and group properties and say its equal :O
+
+        !!!What happens is that becuase the operator is STATIC,
+            therefore NOT VIRTUAL. So at compile time, the compiler
+            determines which version of the operator to call. It will
+            obviously pick the FOOD == because of food1 and food2 are 
+            of type Food, which doesnt know how to compare CookedFood
+            objects.
+
+SO- WHY THE HELL DOES THIS WORK?!
+
+        public static bool operator ==(Food x, Food y)
+        {
+            return object.Equals(x, y);
+        }
+
+        Because static object.Equals calls the virtual object.Equals()!!!
+        so it goes to the CORRECT override :D
+
+
+----
+
+x == y
+ALWAYS does reference equality if x and y are declared as object!
+
+    CompareMe (object x, object y) { x == y }
+
+
+Still not 100% safe to do all of this!
+
+    public static bool operator ==(Food x, Food y)
+    {
+        return object.Equals(x, y);
+        // object.Equals works with inheriteance
+        // BUT! (x, y) is not type safe!
+        // could pass in child class of Food and get REALLY SCREWED
+        // if we never implemented a virtual for that child
+    }
+
+
+WHY NOT IMPLEMENT IEQUATABLE<T>?
+
+    public class Food : IEquatable<Food>
+    {
+        public bool Equals(Food other)
+        {
+            return object.Equals(this, other);
+        }
+    }
+
+    but this is extremely similair to what we already have for ==
+    so we've gained almost nothing by doing this.
+
+    Unlike the == operator, this method doesnt give any nice syntactic sugar
+    and calling this method will be slightly slower than just calling
+    object.Equals() directly!
+
+So for a ref type, we'd almost never implement this. 
+For value types? Cant go wrong.
+
+(tho marginal benefit for Sealed classes)
+
+SEALED 
+    public sealed class CookedFood : Food, IEquatable<CookedFood>
+    {
+        public bool Equals(CookedFood other)
+        {
+            if (!base.Equals(other))
+                return false;
+            return this._cookingMethod == other._cookingMethod;
+        }
+    }
+
+Because cooked food is SEALED. That means the only non-null thing
+that can be passed to it's Equal method are a CookedFood instance
+
+and because it's sealed, we can have INHERITANCE and TYPE SAFETY with equality!
+
+
+Is implementing IEquatable<T> worth it (for sealed classes)? Nah
+
+    +small performance benefit
+        (string implements IEquatable<string>)
+
+    -complicates the type
+    -need to remember 3 ways to implement equality
+        sealed types
+        unsealed types
+        value types

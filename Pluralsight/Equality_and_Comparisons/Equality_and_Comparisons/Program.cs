@@ -277,6 +277,8 @@ namespace Equality_and_Comparisons
             return x.Equals(y);
         }
 
+        // This is a good example of good OOP. 
+        // This method takes any FOOD TYPE
         static void DisplayWhetherEqual(Food food1, Food food2)
         {
             if (food1 == food2)
