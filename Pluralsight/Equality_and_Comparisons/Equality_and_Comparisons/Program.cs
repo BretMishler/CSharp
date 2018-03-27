@@ -96,7 +96,8 @@ namespace Equality_and_Comparisons
             //Part_1_2();
             //Part3();
             //Part4();
-            Part5();
+            //Part5();
+            Part6.Program();
         }
 
         public static void Part5()

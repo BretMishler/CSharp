@@ -1,0 +1,80 @@
+﻿SUMMARY:
+
+CONTENTS:
+    What is a comparison?
+        -Differences between comparisons and equality.
+
+    Support for comparisons:
+        -IComparable<T> and the CompareTo() method.
+        -C# comparison operators: <, <=, >, >=
+
+    How and why to implement comparisons in your types.
+
+    Consuming in generic code:
+        -IComparable<T> works.
+        -C# comparison operators don't work.
+
+.NET has different APIs/interfaces for equality and comparisons
+    (dispite the similarities) because comparisons can be used in a wide
+    range of scenarios
+
+A type can implement IComparable<T> to declare that instances can compare
+    themselves with other instances
+
+Comparison has three possible outcomes:
+    x == y
+    x > y
+    x < y
+
+Microsoft CompareTo will return, respectively
+    0
+    1
+    -1
+
+    "apple".CompareTo("pear") < 0 because "a" < "p" = -1
+    "pear".CompareTo("apple") > 0 because "p" > "a" = 1
+
+All primitives implement the interface IComparable<T>
+    so they can also use the x.CompareTo(y);
+
+EQUALITY Vs. COMPARISONS in .NET
+
+            Equality                        Comparisons
+
+Natural     object.Equals()                 NO SUPPORT
+            (and other methods)             in Sytem.object
+
+            IEquatable<T>                   IComparable<T>
+
+            ==, != operators                >, <, >=, <= operators
+
+Plugged-In  IEqualityComparer<T>            IComparer<T>
+(to be
+reviewd in 
+later 
+lectures)
+
+So why is there Equality for object.Equals() but no support for 
+    comparisons in System.object?
+
+    EQUALITY MAKES SENSE FOR *ALL* TYPES
+    COMPARISONS DON'T MAKE SENSE FOR *MANY* TYPES
+
+
+While IEquatable<T> is a supplement to System.object methods,
+    IComparable<T> is THE way that a type declares it knows how
+    to compare instances
+
+
+Equality can have reference or value
+Comparisons is just value
+
+!!! JUST LIKE with implementing equality for reference types,
+    implementing comparisons is something that, more often than not,
+    YOU SHOULD NOT DO
+
+VERY RARE TO APPROPRIATELY IMPLEMENT IComparable<T> interface
+    Very rare there will be unarguable, "obvious", 
+    natural sorting of objects.
+    Just compare properties.
+
