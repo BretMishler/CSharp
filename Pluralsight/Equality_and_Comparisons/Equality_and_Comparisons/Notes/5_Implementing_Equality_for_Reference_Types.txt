@@ -44,3 +44,30 @@ Differences from implementing equality for a VALUE TYPE:
     This time, for ref type
         we didnt bother implementing IEquatable<T> because its not useful here
         put equality logic in object.Equals()
+
+
+DO NOT CHEESE == Operator by doing something like this
+(which is COPYING the last line in the obj,Equals() override)
+
+        public static bool operator ==(Food x, Food y)
+        {
+            //return object.Equals(x, y);
+            return this._name == rhs._name && this._group == rhs._group;
+        }
+WARNING! Even MS Docs get lazy and do the above. Not all of the logic it skips
+when compared with:
+
+        public override bool Equals(object obj)
+        {
+            // 'this' cannot equal null 
+            if (obj == null)
+                return false;
+            if (ReferenceEquals(obj, this))
+                return true;
+            if (obj.GetType() != this.GetType())
+                return false;
+            Food rhs = obj as Food;
+            return this._name == rhs._name && this._group == rhs._group;
+        }
+
+?EXAMPLE: DisplayWhetherEqual(stewedApple, bakedApple);
