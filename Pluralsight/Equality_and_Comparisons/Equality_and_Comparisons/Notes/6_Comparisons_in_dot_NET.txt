@@ -78,3 +78,13 @@ VERY RARE TO APPROPRIATELY IMPLEMENT IComparable<T> interface
     natural sorting of objects.
     Just compare properties.
 
+
+
+!!! If you overload comparison operators, you really should
+    overload equality operators.
+
+    If (x < y) compiles then programmers will expect (x == y) compile too
+    (but it wont if you didnt overload)
+
+    But if you implement the == then you need to implement Equals,
+    then gethashcode, AND the IEquatable<CalorieCount> interface

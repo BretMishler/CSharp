@@ -31,7 +31,13 @@ public static class Part6
         DisplayOrder(cal300, cal300);
 
         if (cal300 < cal400)
-            Console.WriteLine();
+            Console.WriteLine("cal300 < call400");
+
+        // if you overload comparison operators
+        // you should
+        // overload equality operators
+        if (cal300 == cal400)
+            Console.WriteLine("cal300 == cal400");
     }
 
     // where T must implement the IComparable interface
@@ -65,6 +71,35 @@ public static class Part6
         public int CompareTo(CalorieCount other)
         {
             return this._value.CompareTo(other._value);
+        }
+
+        public bool Equals(CalorieCount other)
+        {
+            return _value == other._value;
+        }
+
+		public override bool Equals(object obj)
+		{
+            if (obj == null)
+                return false;
+            if (!(obj is CalorieCount))
+                return false;
+            return _value == ((CalorieCount)obj)._value;
+		}
+
+		public override int GetHashCode()
+		{
+            return _value.GetHashCode();
+		}
+
+		public static bool operator ==(CalorieCount x, CalorieCount y)
+        {
+            return x._value == y._value;
+        }
+
+        public static bool operator !=(CalorieCount x, CalorieCount y)
+        {
+            return x._value != y._value;
         }
 
         public static bool operator <(CalorieCount x, CalorieCount y)
