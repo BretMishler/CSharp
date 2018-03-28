@@ -1,0 +1,167 @@
+﻿SUMMARY:
+    Ordinal comparison: Just check numerical value for each char.
+
+    Culture-sensitive comparisons:
+        -Perform character expansions etc.
+        -Take accoutn of specific culture.
+        -Slower.
+
+    string offers overloads of Compare() and Equals().
+
+    == gives an ordinal, case-sensitive equality comparison.
+        -But IComparable<T>.CompareTo() is culture-sensitive.
+
+    The compiler might do string pooling.
+
+CONTENTS:
+    What is in a char (not always one character)?]
+
+    Issues when comparing string.
+        -Case.
+        -Culture
+
+    Code demos of different types of string comparisons.
+        -When to use each comparison type.
+
+    What do standard techniques do?
+        -object.Equals(), ==, IComparable<T>, etc.
+
+    String pooling.
+
+
+STRINGS in C# are essentially an array of CHARs instances
+
+CHAR is a 16-bit unsigned int, 0 to 65535
+    lots of C# programmers think of chars as representing a single unicode
+        character. THATS NOT EXACTLY CORRECT
+
+    Very often, many (NOT ALL) char values DO represent Unicode characters
+        65      => A (capital)
+        U+0041  => A
+        "65 is the Unicode Code Point for A", normally gets written in hex
+        with prefix 'U+'
+
+        112     => p (not capital)
+        U+0070  => p
+
+        I THINK THIS IS WRONG! (hmm but later in lecture the below values
+        hold true with 
+        string.Compare("lemon", "LEMON", StringComparison.Ordinal);
+        which returns a positive number)
+        Backwards, looked up unicode characters
+        a-z     => 65 to 90     => U+0041 to U+004A
+        A-Z     => 97 to 122    => U+0061 to U+005A
+
+So- example for when a char instance doesnt contain a single logical character.
+
+        223     => ß
+        U+00DF  => ß
+        Alternative way of writting ss
+
+        For comparison purposes, ß = ss
+        So example of a  Character Expansion
+
+        When comparing strings, expand character expansions first!
+        U+00DF  -> U+0073   + U+0073
+        ß           s           s
+
+        this is only for comparing strings, not displaying them 
+        (which the code point is till 223)
+
+SURROGATES Vs. EXPANSIONS
+    Character Expansion => Multiple actual characters when comparing
+        -Is One char                 (not displaying)
+    Surrogate           => Store one single character
+        -Is Two chars
+
+    But with char, we can only store 16-bits (0 to 65,535 = 0xFFFF0)
+    This cant represent every single character in every language in the world!
+
+    !Unicode Code Points are from 0 to 1,114,111 (=0x10FFFF)
+
+    So clearly, you cant represent all Unicdoe Code Points in a 16-bit
+        unsigned int!!!
+
+    Because of this, Unicode UTF 16 has a system where some characters are
+        represented by two successive 16-bit numbers
+
+        SURROGATE PAIRS!!!
+
+SURROGATE PAIRS
+    Read above. You'll know youve hit a surrogate pair because the first value
+    (called highed sarrogate)starts between U+D800 and U+DBFF
+                                    (55,296 to 56,3190)
+
+    so if youre parsing a string and hit a value in this range, then you know
+    that you need to read this AND THE NEXT char (called low sarrogate) 
+    together to find out what the actual character is thats being represented
+
+    EXAMPLE:
+    🎧 (headphones) = (U+1F3A7) <= U+DBFC + U+DFA7
+
+COMBINING CHARACTERS
+    Some code points modify the previous character, such as character accents
+
+    ä = U+00E4
+    OR
+    ä = a + ..(umlaut) = U+0061 + U+0308 
+
+    so for comparisons, youd want to treat the following as equal
+    U+00E4 = U+0061 + U+0308
+
+STATIC
+    string.Compare()
+    is static method becuase this is method is on string., not some variable 
+    like x.() or monkey.()
+
+COMPARING STRINGS
+    Use the StringComparison Enum!!!!
+    StringComparison.Enum
+
+    ORDINAL COMPARISON
+        -Ignore the culture and Unicode issues
+        -Compare numeric values of chars only
+
+        Example:
+        string.Compare("lemon", "lime", StringComparison.Ordinal)
+        'l' 'e' 'm' 'o' 'n'
+        108 101 109 111 110
+             X
+        108 105 109 101
+        'l' 'i' 'm' 'e'
+
+        lemon < lime so returns a negative number, not necessary -1 tho
+        Remember IComparable<T>
+        =0 if x=y
+        <0 if x<y
+        >0 if x>y
+
+        returns -4
+
+        string.Compare("lemon", "LEMON", StringComparison.Ordinal);
+        returns 32!
+
+    CULTURE-SENSITIVE
+        Consider 'meaning' of numeric value
+        ß => ss
+
+        consider any ordering rules for the culture
+        Eg rules for accented characters
+
+    INVARIANT CULTURE
+        special cultures, loosely based on en-US
+        diagnostic logs, xml files, doesnt change if the user's culture changes
+
+Which to use?
+    Showing data to end user?
+        YES -> Use current culture
+        NO -> Use Ordinal (high performance, culture-independent)
+
+        rarely use invariant
+
+IComparable<T>.CompareTo()
+    -current culture
+    -case-sensitive
+    -ignores some symbols
+
+    so best to be explicit with Compare() w/ specific overload
