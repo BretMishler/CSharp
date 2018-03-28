@@ -52,7 +52,7 @@ public static class Part6
             Console.WriteLine("{0,12} < {1}", x, y);
     }
 
-    public struct CalorieCount : IComparable<CalorieCount>
+    public struct CalorieCount : IComparable<CalorieCount>, IEquatable<CalorieCount>, IComparable
     {
         private float _value;
 
@@ -92,7 +92,17 @@ public static class Part6
             return _value.GetHashCode();
 		}
 
-		public static bool operator ==(CalorieCount x, CalorieCount y)
+        // IComparable, not type safe
+		public int CompareTo(object obj)
+        {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+            if (!(obj is CalorieCount))
+                throw new ArgumentException("Expected CalorieCount Instance", "obj");
+            return CompareTo((CalorieCount)obj);
+        }
+
+        public static bool operator ==(CalorieCount x, CalorieCount y)
         {
             return x._value == y._value;
         }

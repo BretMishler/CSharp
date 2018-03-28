@@ -1,4 +1,17 @@
 ﻿SUMMARY:
+    To implement comparisons on your types:
+        -Implement IComparable<T>.
+        -Optionally implement comparison operators.
+
+    Microsoft types:
+        -Most types have no support for comparisons.
+        -int, float, etc. implement IComparable<T> and the operators.
+        -string implements IComparable<T> only.
+
+    Usually, writing a custom comparar is better than implementing comparisons.
+
+    Consuming comparisons in generic code requires the interface, not the
+    operators.
 
 CONTENTS:
     What is a comparison?
@@ -88,3 +101,19 @@ VERY RARE TO APPROPRIATELY IMPLEMENT IComparable<T> interface
 
     But if you implement the == then you need to implement Equals,
     then gethashcode, AND the IEquatable<CalorieCount> interface
+
+    AND!! THERES MORE
+
+    Need to implement IComparable since CalorieCount has public visibility and 
+    we dont know what other code will use it
+
+Ultimately we added ~100 lines just to write a comparison suite
+    JUST for a value type!
+
+
+REFERENCE TYPE ISSUES
+    We'd need to do a lot more type and null checking
+    if not sealed, even more problems
+        when tying to implement compareto, you run into more issues.
+
+REALLY REALLY AVOID implementing your own comparisons on nonsealed ref types
