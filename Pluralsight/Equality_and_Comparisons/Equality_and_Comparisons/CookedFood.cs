@@ -2,7 +2,7 @@
 namespace Equality_and_Comparisons
 {
     // sealed -> nothing else can derive from this
-    public sealed class CookedFood : Food
+    public sealed class CookedFood : Food, IEquatable<CookedFood>
     {
         // == and != already overriden in base but its good practice
         // to be explicit here as well

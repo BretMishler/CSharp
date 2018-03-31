@@ -1,0 +1,76 @@
+﻿SUMMARY:
+
+CONTENTS:
+    What comparers and equality comparers are.
+        -Why collections rely on them.
+
+    Comparer demo:
+        -Allow sorting Food instances.
+
+    Equality comparer demo:
+        -Ignoring case in a hash set of FoodItem instances.
+
+    Default comparers.
+
+    String comparers.
+
+
+Array type and Array.sort() know nothing about how the string type!!!
+
+    So how does it know how to sort them in any meaningful way?
+
+    It works because string implements IComparable<string>
+        this holds the string compare (sort)logic!
+
+
+COMPARER: A comarer knows how to compare other objects 
+    (according to some criteria, which you set)
+
+    can then use with Array sort
+
+
+    A comparer implemence IComparer<T> which defines a method that a 
+        type implements to compare two objects
+
+    Convention is anaologous to:
+        -IComparable<T> -> compareTo() 
+        -string's static compare method
+
+IComparer<T>.Compare(x, y)
+    =0 if x=y
+    <0 if x<y
+    >0 if x>y
+
+
+BUILDING A COMPARER:
+    See FoodNameComparer
+
+    Recommended way is to derive a comparer form
+        Systems.Collections.Generic.Comparer<T>
+
+    Comparer<T> implements IComparer<T>
+
+ICOMPARER vs COMPARER
+
+    Why override abstract method in base class (Comparer<T>)
+    instead of implementing the interface?
+
+        Occasionally useful to know that IComparer<T> isnt the only
+            interface that comparers are supposed to implement!!!!
+
+            Also a non-generic ICompare interface
+                which takes to Object's as params, so not strong typed
+
+            Does same thing as generic interface
+
+            BUT- point of IComparer is that any code that cant cope with
+                generics can still consume the nongeneric interface
+
+            Eh, rarely used though unless type is publically expose
+
+            Comparer<T> implements BOTH:
+                IComparer<T>
+                IComparer
+
+Comparers make good singletons
+    which saves a bit of memory if you need to use in more than one place

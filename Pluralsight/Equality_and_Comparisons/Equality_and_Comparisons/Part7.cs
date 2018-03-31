@@ -23,7 +23,7 @@ public static class Part7
         string str4 = "Strasse";
         DisplayAllComparisons(str3, str4);
 
-        string str5 = "erkl\u00e4en";
+        string str5 = "erkl\u00e4ren";
         string str6 = "erkla\u0308ren";
         DisplayAllComparisons(str5, str6);
 

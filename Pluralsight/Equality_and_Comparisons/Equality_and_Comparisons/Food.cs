@@ -48,9 +48,16 @@ namespace Equality_and_Comparisons
             this._group = group;
         }
 
-        public override string ToString()
-        {
-            return _name;
-        }
-    }
+		// BEFORE CHAPTER 8
+		//public override string ToString()
+		//{
+		//    return _name;
+		//}
+
+		// CHANGED FOR CHAPTER 8+
+		public override string ToString()
+		{
+            return string.Format("{0} ({1})", _name, _group);
+		}
+	}
 }
