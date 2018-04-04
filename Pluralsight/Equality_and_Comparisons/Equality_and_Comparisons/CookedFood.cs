@@ -4,6 +4,13 @@ namespace Equality_and_Comparisons
     // sealed -> nothing else can derive from this
     public sealed class CookedFood : Food, IEquatable<CookedFood>
     {
+        // Needed for IEquatable<T>
+        public bool Equals(CookedFood other)
+        {
+            if (!base.Equals(other))
+                return false;
+            return this._cookingMethod == other._cookingMethod;
+        }
         // == and != already overriden in base but its good practice
         // to be explicit here as well
         public static bool operator ==(CookedFood x, CookedFood y)
@@ -44,7 +51,7 @@ namespace Equality_and_Comparisons
 
         public override string ToString()
         {
-            return string.Format("{0} {1}", _cookingMethod, Name);
+            return string.Format("{0} {1} ({2})", _cookingMethod, Name, Group);
         }
     }
 }

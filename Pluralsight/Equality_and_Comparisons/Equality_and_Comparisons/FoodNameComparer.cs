@@ -30,8 +30,18 @@ namespace Equality_and_Comparisons
             //      (Compare(x, null) > 0)
             if (y == null)
                 return 1;
+
+            // bad example, only compares one property
+            //return string.Compare(x.Name, y.Name, StringComparison.CurrentCulture);
+
+            int nameOrder = string.Compare(x.Name, y.Name,
+                                           StringComparison.CurrentCulture);
             
-            return string.Compare(x.Name, y.Name, StringComparison.CurrentCulture);
+            if (nameOrder != 0)
+                return nameOrder;
+
+            return string.Compare(
+                x.Group.ToString(), y.Group.ToString(), StringComparison.CurrentCulture);
         }
     }
 }
