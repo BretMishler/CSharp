@@ -74,3 +74,14 @@ ICOMPARER vs COMPARER
 
 Comparers make good singletons
     which saves a bit of memory if you need to use in more than one place
+
+
+Writing a reobust comparer for a non-sealed reference type is problematic
+    unless you;re willing to just check base class fields and ignore extra
+    fields in the derived types
+
+
+IComparable<T>                  vs              IComparer<T>
+Implemented by T                                Implemebed by a custom comparer
+Suited to 'natural' comparisons                 Allows 'plugging in' alternative comparisons
+                                                Means you can have as many comparers as you want for T
