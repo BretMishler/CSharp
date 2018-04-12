@@ -56,5 +56,22 @@ OTHER GetHashCode() REQUIREMENTS
 
     hash codes must get evenly split among all possible integers
 
+
+A BASIC HASH CODE ALGORITHM
     
+    MS types have good GetHashCode() implementations
+    XOR is fast and gives a good spread of values
+
+EXCLUSIVE OR FOR HASH CODES
+for each bit: ans = 1 if bits are diff, 0 otherwise
+
+    24                  00011000
+xor 45                  00101101
+-------                 --------
+    53                  00110101
+
+    Very fast
+    Answer not directly related numerically to inputs
+
+WHEN FIELDS ARE NOT USED IN EQUALITY
     
