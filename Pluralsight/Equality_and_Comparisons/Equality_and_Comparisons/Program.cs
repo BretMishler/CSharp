@@ -121,6 +121,9 @@ namespace Equality_and_Comparisons
 
         public struct FoodItem : IEquatable<FoodItem>
         {
+            private readonly string _name;
+            private readonly FoodGroup _group;
+
             // implemented by VS if you ask it to with right-click
             // interface part
             public bool Equals(FoodItem other)
@@ -157,9 +160,6 @@ namespace Equality_and_Comparisons
                 return _name.GetHashCode() ^ _group.GetHashCode();
                 // ^ is XOR (exclusive OR)
 			}
-
-			private readonly string _name;
-            private readonly FoodGroup _group;
 
             public string Name { get { return _name; }}
             public FoodGroup Group { get { return _group; }}

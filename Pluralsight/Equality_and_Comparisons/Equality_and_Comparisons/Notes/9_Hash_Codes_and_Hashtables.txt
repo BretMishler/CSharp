@@ -1,4 +1,15 @@
 ﻿SUMMARY:
+    Motivation of GetHashCode() is to support some collections.
+        -Notable Dictionary<TKey, TValue>
+
+    If instances evalute as equal, they MUST return the same hash code
+
+    Hash codes should be:
+        -Quick to computer.
+        -Evenly spread out.
+
+    Combine field hash codes with XOR:
+        -Good way to satisfy these requirements.
 
 CONTENTS:
     Hash codes enable collections with hash tables to work.
@@ -74,4 +85,5 @@ xor 45                  00101101
     Answer not directly related numerically to inputs
 
 WHEN FIELDS ARE NOT USED IN EQUALITY
+
     
