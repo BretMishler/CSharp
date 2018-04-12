@@ -1,1 +1,60 @@
-﻿
+﻿SUMMARY:
+
+CONTENTS:
+    Hash codes enable collections with hash tables to work.
+        -such as Dictionary<TKey, TValue>
+
+    Requirements of a hashing function.
+        -Consistency with equality.
+
+    How to code up GetHashCode().
+        -COmbine fields with XOR
+
+    Exclusive OR.
+        -What it does
+        -Why it's so good for hash codes
+
+
+WHAT IS HASHTABLE?
+    Hash codes and the GetHashCode method exist in order to allow types
+        to be used in hash tables
+
+    Speeds up process of looking up item in collection
+
+    Dictionary <Tkey, TValue> takes advantage of this
+
+    Great for performance
+
+
+HOW HASHTABLES USE GetHashCode()
+
+    var x; needs to go into a hash table
+    x.GetHashCode() returns int32 of hash of that val
+
+    hash then divs hash code by # bucks in hash table and KEEPS remainder
+
+    int bucketIndex = x.GetHasCode() % numBuckets
+
+    ex
+    "apple".GetHashCode() returns 1 657 858 284
+    "apple".GetHashCode() % 5 returns 4
+
+    so apple will go in bucket #4
+
+
+EQUAL OBJECTS MUST RETURN THE SAME HASH CODE
+
+    Capital A in "Apple"will return a different mod
+
+    So what if we want case-insensitive?
+    StringComparer.OrdinalIgnoreCase;  
+
+    string.GetHashCode() won't do this so this dictionary cant't use
+        string.GetHashCode() for case insenstivie
+
+OTHER GetHashCode() REQUIREMENTS
+
+    hash codes must get evenly split among all possible integers
+
+    
+    
