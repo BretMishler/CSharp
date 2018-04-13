@@ -1,0 +1,51 @@
+﻿SUMMARY:
+    Structural equality: Contains same elements in same order.
+        -(Only supported by a few collections)
+
+    IStructuralEquatable to check for structural equality.
+        -Requires a custom equality comparer.
+
+    IStructuralComparable to check for structural > or <.
+        -Requires a customer comparer.
+
+CONTENTS:
+    Way of checking if collections contain:
+        -The same elements.
+        -In the same order.
+
+    IStructuralEquatable
+
+    IStructuralComparable
+
+    Limited support:
+        -Arrays
+        -Tuples
+
+    Course overview
+
+STRUCTUAL EQUALITY AND IStructuralEquatable
+
+    Supported by:
+        -Arrays
+        -Tuples
+
+    Structual equality:
+        Contains the same elements, in the same order
+        as another collection
+
+    !Arrays are ref types- dont implement equality
+
+    IStructuralEquatable:
+        allows testing for structual equality
+
+    Although this looks useful, theres not that many
+        collections that will support this
+
+    IStructuralEquatable is not a generic interface
+
+IStructuralComparable
+    Like IstructuralEquatable
+
+    But for ordering comparisons
+
+    Tells you whether one structure comes before or after
