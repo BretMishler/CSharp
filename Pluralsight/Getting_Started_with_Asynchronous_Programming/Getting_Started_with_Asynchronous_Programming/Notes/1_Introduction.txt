@@ -1,0 +1,38 @@
+﻿Example Application:
+    Show a loading Indicator
+    Start async operation of
+        1. read a largte CSV file from disk
+        2. Process rows in parallel
+        3. Async operation completed
+    Render result on screen
+    Remove loading indicator
+    
+Synchronous Programming
+    simultaneous processing
+    handle result when processing is done
+
+Asynchronous vs Parallel Programming
+    Parallel programming is generally used to conquer a bigger problem
+    and chop into smaller chunks
+
+    can introduce parallel programming WITH asynchronous programming
+
+    Imagine Boiling Eggs:
+        Eggs boiling - boiling in "parallel"
+        While eggs boil, you go do something else - asynchronously
+
+
+Async Operation
+    will notify us when operation is done!
+
+AJAX:
+    Asynchronous JavaScript and XML
+
+
+Why do all this?
+    Avoid unrelaible apps
+    get happier users
+    build faster apps
+
+
+
