@@ -6,6 +6,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Getting_Started_with_Asynch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnreliableWPFApplication", "..\..\..\..\..\Desktop\UnreliableWPFApplication\UnreliableWPFApplication.csproj", "{1B90DD9F-D5F0-4B94-A4EA-8D8E96064755}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReliableWPFApplication", "..\..\..\..\..\Desktop\ReliableWPFApplication\ReliableWPFApplication.csproj", "{CA617110-8496-47F0-A99C-78E74FC7D8F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{1B90DD9F-D5F0-4B94-A4EA-8D8E96064755}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B90DD9F-D5F0-4B94-A4EA-8D8E96064755}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B90DD9F-D5F0-4B94-A4EA-8D8E96064755}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA617110-8496-47F0-A99C-78E74FC7D8F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA617110-8496-47F0-A99C-78E74FC7D8F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA617110-8496-47F0-A99C-78E74FC7D8F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA617110-8496-47F0-A99C-78E74FC7D8F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
