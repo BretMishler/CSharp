@@ -1,7 +1,10 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Getting_Started_with_Asynchronous_Programming", "Getting_Started_with_Asynchronous_Programming\Getting_Started_with_Asynchronous_Programming.csproj", "{01B59E1A-F928-4344-BA76-481B1EFF6A03}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Getting_Started_with_Asynchronous_Programming", "Getting_Started_with_Asynchronous_Programming\Getting_Started_with_Asynchronous_Programming.csproj", "{01B59E1A-F928-4344-BA76-481B1EFF6A03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnreliableWPFApplication", "..\..\..\..\..\Desktop\UnreliableWPFApplication\UnreliableWPFApplication.csproj", "{1B90DD9F-D5F0-4B94-A4EA-8D8E96064755}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,5 +16,15 @@ Global
 		{01B59E1A-F928-4344-BA76-481B1EFF6A03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01B59E1A-F928-4344-BA76-481B1EFF6A03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01B59E1A-F928-4344-BA76-481B1EFF6A03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B90DD9F-D5F0-4B94-A4EA-8D8E96064755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B90DD9F-D5F0-4B94-A4EA-8D8E96064755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B90DD9F-D5F0-4B94-A4EA-8D8E96064755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B90DD9F-D5F0-4B94-A4EA-8D8E96064755}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B042D313-6D29-4E27-A990-0DC096D7C5BF}
 	EndGlobalSection
 EndGlobal
