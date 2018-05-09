@@ -1,0 +1,59 @@
+﻿ASYNC TASK:
+marking a method as an async Task (as opposed to async Task<T>) means run a method as an async operation but do not return a value
+intended to be used like calling a void method
+
+EXCEPTIONS and VOID - ASYNC VOID IS (usually) BAD!!!!
+When you mark something as await, the compiler generates a state machine. 
+
+it keeps track of async operations and continuations. When it catches an exception, the state
+machine tries to set that exception somewhere. A task is a good method signature to do this. If you try and do it on a void, nothing gets
+returned to the caller so it cannot track the exception.
+
+So whoever calls the async task needs to verify that it was successful. We can use async void, though, with matching event handlers/delegate.
+
+BAD EXAMPLE:
+
+        
+        private async void LoginButton_Click(object send, RoutedEventArgs e)
+        {
+			try
+			{
+				LoginAsync();
+			}
+			catch (Exception)
+			{
+			}
+            
+        }
+
+        private async void LoginAsync()
+        {
+			ThrowSomeException();
+            var result = await Task.Run(() =>
+            {
+                Thread.Sleep(2000);
+                return "Login Successful";
+            });
+
+            LoginButton.Content = "Login Successful";
+
+        }
+
+GOOD EXAMPLE:
+
+        private async void LoginButton_Click(object send, RoutedEventArgs e)
+        {
+            try
+            {
+                await LoginAsync();
+            }
+            catch (Exception)
+            {
+                LoginButton.Content = "Login Failed!";
+            }
+        }
+
+        private async Task LoginAsync()
+        {
+            throw new UnauthorizedAccessException();
+        }
