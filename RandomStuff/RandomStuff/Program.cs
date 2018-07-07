@@ -6,7 +6,7 @@ namespace RandomStuff
     {
         static void Main(string[] args)
         {
-            Peterson.Program();
+            HashTableDemo.Program();
         }
     }
 }
