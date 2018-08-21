@@ -24,12 +24,16 @@ namespace RandomStuff
 
         public static void Program()
         {
-            userInfoHash = new Hashtable();
-            userInfoList = new List<UserInfo>();
-            sw = new Stopwatch();
+            //userInfoHash = new Hashtable();
+            //userInfoList = new List<UserInfo>();
+            //sw = new Stopwatch();
+
+            var ht = new Hashtable();
+            ht.Add("Area", 100);
+            var x = ht["Area"];
 
             // Adding
-            for (int i = 0; i < 4000000; i++)
+                                                    for (int i = 0; i < 4000000; i++)
             {
                 // first param is key
                 // it can be any object val
