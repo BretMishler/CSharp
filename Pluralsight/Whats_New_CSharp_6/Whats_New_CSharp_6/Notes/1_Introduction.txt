@@ -1,0 +1,106 @@
+Brief History
+C# 1 (2002)
+C# 2 (2005)
+	Generics<T>
+C# 3 (2007)
+	Language Integrated Query Features
+		Lambda Expressions
+		Implicit Typing
+		Query Syntax
+C# 4 (2010)
+	dynamic keyword
+	dynamic language runtime
+C# 5 (2012)
+	async
+	await
+
+C# 6.0 Language Features
+	A lot about refinement- more stuff in less code
+	
+	HIGHLIGHTS
+
+		-Auto Property Initializer-
+			public class User
+			{
+				// Auto Property Initializer
+				public Guid Id { get; } = Guid.NewGuid();
+			}
+
+			allows us to write expressions alongside our property declarations which can set a property to an initial value
+			dont have to provide a setter
+			allow for a true, readonly property with an automatic implementation
+
+
+		-Primary Constructor-
+			public struct Money(string currency, decimal amount)
+			{
+			 public string Currency { get; } = currency;
+			 public decimal Amount { get; } = amount;
+			}
+
+			allow us to place the params for a construc immediately after a type name and then use those params inside
+				initialzer expressions in the rest of the type definition
+			Saves us from writing an explicit constructor with a lot of left-to-right assignments inside
+
+
+		-`using` Static Type Names-
+			using System.Console;
+
+			class Program
+			{
+				public static void Main()
+				{
+					// dont have to write Console.WriteLine here
+					WriteLine("Hello World!");
+				}
+			}
+
+
+		-Dictionary Initializers-
+			Dictionary<string, User> _defaultUsers = new Dictionary<string, User>()
+			{
+				["admin"] = new User("admin"),
+				["guest"] = new User("guest")
+			};
+
+			grant new form of collection initializer syntax where we can use indexing expressions
+
+
+		-New Syntax For Numeric Literals-
+			public class Digits
+			{
+				public byte Code { get; } = 0b1100;
+				// more readable decimal numbers
+				public long Length { get; } = 1_000_000_000;
+			}
+
+
+		-Declaration Expressions-
+			int result = 0;
+			// Can now declare variable (ex. is odd) in expression that gives the foreach the enumerable sequence 
+			foreach (var n in var odd = numbers.Where(n => n % 2 == 1).ToList())
+				{
+					result += n + odd.Count();
+				}
+
+
+		-New Syntax Features For When Things Are Going Wrong-			
+			var name = operation ?.Method ?.Name ?? "no name";
+
+			try
+			{
+				operation();
+				await _logWriter.WriterAsync(name + " executed");
+			}
+			catch (Exception ex) if (ex.Message != null)
+			{
+				await _logWriter.WriteAsync(name + " failed");
+			}
+			finally
+			{
+				await _logWriter.FlushAsync();
+			}
+
+			new conditional access operator '?.'
+				operator allow you to deref valid pointers but returns NULL instead of a NullRefException
+			Can use await inside of a catch block
