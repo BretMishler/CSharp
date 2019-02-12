@@ -1,0 +1,42 @@
+KEY TAKEAWAYS!!!!!!
+-----
+.NET Implements equality for all types
+    -Reference equality for reference types.
+    -Value equality for value types.
+
+You can override equality for any type:
+    -But it's complicated.
+    -Issues around type safety and inheritance.
+
+You can write custom comparers and equality comparers.
+
+Strings are special - specific ways to do comparisons.
+
+-----
+
+METHODS/OPERATORS               INTERFACES
+object.Equals()                 IEquatable<T>      
+static object.Equals()          IComparable<T>
+object.ReferenceEquals()        IComparable
+object.GetHashCode()            IComparer
+operator ==                     IComparer<T>
+operator !=                     IEqualityComparer
+operator <                      IEqualityComparer<T>
+operator <=                     IStructuralEquatable
+operator >                      IStructuralComparable
+operator <=
+
+
+
+SYSTEM.OBJECT
+virtual bool Equals(object other)
+    basic equality
+virtual int GetHashCode()
+    hash codes
+static bool Equals(object other)
+    can deal with nulls
+static bool ReferenceEquals(object other)
+    guarantees reference equality
+
+Operators
+    static methods
