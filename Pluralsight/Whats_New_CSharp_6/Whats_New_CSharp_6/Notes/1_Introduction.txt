@@ -104,3 +104,19 @@ C# 6.0 Language Features
 			new conditional access operator '?.'
 				operator allow you to deref valid pointers but returns NULL instead of a NullRefException
 			Can use await inside of a catch block
+
+
+COMPILER FEATURES
+	Roslyn
+		Code name for .NET Compiler Platform
+		Covers C# and VB
+		Source code is open
+		Designed to be a platform - compiler as a service
+			Can reference assemblies and api to work with solutions, source code files, and syntax trees
+			Can write extensions that plug into Visual Studio that provide custom error messages, warnings, and refactoring
+
+SCRIPTCS
+	Takes advantage of Roslyn
+	Makes C# into a scripting language (can run C# code from the command line, can write + edit simply with Notepad++)
+	Usefull for exploring an API
+	Behind the scenes, uses Roslyn to compile and excute the code
