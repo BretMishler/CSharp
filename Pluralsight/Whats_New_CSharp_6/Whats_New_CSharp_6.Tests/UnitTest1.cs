@@ -11,7 +11,7 @@ namespace Whats_New_CSharp_6.Tests
         {
             var u1 = new User();
 
-            Assert.AreNotEqual(Guid.Empty, u1.Id)
+            Assert.AreNotEqual(Guid.Empty, u1.Id);
         }
     }
 }

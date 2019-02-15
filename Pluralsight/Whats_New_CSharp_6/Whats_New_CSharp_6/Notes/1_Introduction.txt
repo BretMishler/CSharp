@@ -30,7 +30,7 @@ C# 6.0 Language Features
 			dont have to provide a setter
 			allow for a true, readonly property with an automatic implementation
 
-
+		!!! CUT FROM C# 6 SO IGNORE THIS
 		-Primary Constructor-
 			public struct Money(string currency, decimal amount)
 			{

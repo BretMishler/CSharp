@@ -49,3 +49,29 @@ Auto-Property Initializers
 		public string Username { get; protected set; } = String.Empty;
      
 		This is what Primary Constructors would help with!
+		(ACTUALLY - THE ENDED UP BEING CUT FROM C# 6 AND FUTURE RELEASES UP TO THE POINT OF TIME WHERE I GOOGLED THIS lol)
+
+
+
+Dictionary Initializers
+	PRE C#6
+		Dictionary<string, User> _defaultUsers
+			= new Dictionary<string, User>()
+			{	//	key,	value
+				{"admin", new User("admin")},
+				{"guest", new User("guest")}
+			};
+
+	POST C#6
+		Dictionary<string, User> _defaultUsers
+			= new Dictionary<string, User>()
+			{	//	key,	value
+				["admin"] = new User("admin"),
+				["guest"] = new User("guest")
+			};
+
+	Subtle differences behind the scenes
+		PRE C#6 example, compiler uses dictionary.Add(K, V);
+			dictionary.Add("admin", new User("admin"));
+		POST C#6 example, compiler will assign V by using K as an index
+			dictionary["admin"] = new User("admin");
