@@ -40,3 +40,12 @@ AUTO PROPERTY INITIALIZERS
 			// auto property initializer
 			public Guid Id { get; } = Guid.NewGuid();
 		}
+
+
+Auto-Property Initializers
+	
+!!!!
+	May be wondering how we could ever change a property like the following (that uses Auto-Property Initialization)
+		public string Username { get; protected set; } = String.Empty;
+     
+		This is what Primary Constructors would help with!
