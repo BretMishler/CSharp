@@ -2,6 +2,10 @@ using System;
 
 public class User
 {
+    public User(string name)
+    {
+        Username = name;
+    }
 
     //dont have to write 'set' with this auto prop init syntax
     public Guid Id { get; } = Guid.NewGuid();
