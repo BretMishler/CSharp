@@ -27,7 +27,17 @@ namespace Whats_New_CSharp_6
 
         public int Capacity { get; } = _capacity;
 
-        public User Add(User newUser)
+        // normally would want an ADD method so the compiler knows was to do when
+        // your building a list of objects.
+        // Lets say in this case we're working with an API and dont have one 
+        // because authors decided to make it called 'Insert'
+        //public User Add(User newUser)
+        //{
+        //    _users.Add(newUser);
+        //    return newUser;
+        //}
+
+        public User Insert(User newUser)
         {
             _users.Add(newUser);
             return newUser;

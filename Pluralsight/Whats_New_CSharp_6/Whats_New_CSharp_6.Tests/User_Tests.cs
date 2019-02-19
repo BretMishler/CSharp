@@ -9,7 +9,7 @@ namespace Whats_New_CSharp_6.Tests
         [TestMethod]
         public void User_Creates_An_Id()
         {
-            var u1 = new User();
+            var u1 = new User("a name");
 
             Assert.AreNotEqual(Guid.Empty, u1.Id);
         }

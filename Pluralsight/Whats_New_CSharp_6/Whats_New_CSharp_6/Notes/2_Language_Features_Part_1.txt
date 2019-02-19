@@ -53,7 +53,7 @@ Auto-Property Initializers
 
 
 
-Dictionary Initializers
+DICTIONARY INITIALIZERS
 	PRE C#6
 		Dictionary<string, User> _defaultUsers
 			= new Dictionary<string, User>()
@@ -75,3 +75,73 @@ Dictionary Initializers
 			dictionary.Add("admin", new User("admin"));
 		POST C#6 example, compiler will assign V by using K as an index
 			dictionary["admin"] = new User("admin");
+
+
+!!!
+Can now use EXTENSION METHODS named 'Add' to
+	-make intiializer syntax work for types that are IEnumerable
+	-and have some sort of API that allow you to add things into them but havent
+		named the method 'Add'
+
+
+
+EVENT INITIALIZERS
+
+	ex class
+		public class User
+		{
+			public void Speak()
+			{
+				if(Speaking != null)
+				{
+					Speaking(this, new EventArgs());
+				}
+			}
+			public string Name { get; set; }
+			public event EventHandler<EventArgs> Speaking;
+		}
+
+	ex use
+		public class Program
+		{
+			public static void Main()
+			{
+				EventHandler<EventArgs> log = (o, e) => Console.Write("hit");
+
+				var user = new User()
+				{
+					Name = "Scott",
+					// wire up speaking event to our own delegate
+					Speaking += log
+				};
+			}
+		}
+
+
+PARAMS AND IENUMERABLE
+
+	Used to have to pass in an ar4ay and receive params int[] numbers
+		public static void Main()
+		{ 
+			var result = Sum(45, 54, 14);
+		}
+
+		public int Sum(params IEnumerable<int> numbers)
+		{
+			return numbers.Sum(n => n);
+		}
+
+	Array will force you to convert your Enumerable to a concrete, in-memory data struct
+		before you even call the method
+	The updated example above will 
+		lazily work through sequence and sometimes save on mem and processing.
+
+
+LITERALS AND SEPERATORS
+	Ease of readability
+
+	public class Digits
+	{
+		public byte Code { get; } = 0b1100;
+		public long Length { get; } = 1_000_000_000;
+	}
