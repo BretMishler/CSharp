@@ -1,0 +1,24 @@
+STATIC	
+	using statements only allow namespaces and static classes 
+
+
+ERRORS, NULLS, EXCEPTIONS
+	
+	Conditional Access Operator
+	        
+			var name = "no name";
+
+            if(action != null && action.Method != null)
+            {
+                name = action.Method.Name;
+            }
+
+        introducted in C# 6, this is almost equalivalent to the above
+            var name = action?.Method?.Name;
+
+		If action is null, it returns nulls
+		If action is not null but method is null, it will return null
+		If action is not null and method is not null, it will return Name
+
+		To make it totally equavilent
+			var name = action?.Method?.Name ?? "no name";
