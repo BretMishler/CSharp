@@ -1,0 +1,30 @@
+COURSE OUTLINE
+	1. Working with Nullable Value Types and Strings
+	2. Accessing and Checking Null Values
+	3. Eliminating Null Reference Exceptions
+
+
+REFERENCE AND VALUE TYPES OVERVIEW
+	Value Type
+		Abstraction: Imagine two physical copies of the same book - can highlight text or write in one and the other is not effected
+		-C# struct
+		-Independent instances/copies
+		-Value change doesnt affect other copies
+		-Value IS the information itself
+		-No refence, cannot be null
+		-No need to check for nulls
+
+		A value type may sometimes need to additionally represent a null value
+			Ex. a null val coming from the DB whose field is nullable
+				In this case the bool can be True, False, or Null
+			1. Use "Magic number"
+			2. Nullable<T> (better approach, comes with .NET)
+
+	Reference Type
+		Abstraction: An href that points to a source. You and I get the href to the same source.
+		-C# class
+		-Single shared instance
+		-Value change affects people (references) pointing to it
+		-The reference POINTS TO the information
+		-Reference may point to "nothing" (null)
+		-Null checking code may be required
