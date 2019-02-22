@@ -42,9 +42,6 @@ namespace Whats_New_CSharp_6
             {
                 await LogWriter.FlushAsync();
             }
-
-            await LogWriter.WriteLineAsync(name + " executed");
-            await LogWriter.FlushAsync();
         }
 
         void IDisposable.Dispose()
