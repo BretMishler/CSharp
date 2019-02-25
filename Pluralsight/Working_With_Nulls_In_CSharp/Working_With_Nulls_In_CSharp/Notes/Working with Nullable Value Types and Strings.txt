@@ -17,7 +17,7 @@ REFERENCE AND VALUE TYPES OVERVIEW
 		A value type may sometimes need to additionally represent a null value
 			Ex. a null val coming from the DB whose field is nullable
 				In this case the bool can be True, False, or Null
-			1. Use "Magic number"
+			1. Use "Magic number" (not recommended)
 			2. Nullable<T> (better approach, comes with .NET)
 
 	Reference Type

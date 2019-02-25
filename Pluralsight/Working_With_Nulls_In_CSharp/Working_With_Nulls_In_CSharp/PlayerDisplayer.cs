@@ -16,6 +16,7 @@ namespace Working_With_Nulls_In_CSharp
 
             // DaysSinceLastLogin could be null if they just created an account and have never logged in
             // so we'll choose an arbitrary value as a "magic number" for nulls
+            // though this technique is not recommended
             if (player.DaysSinceLastLogin == -1)
                 Console.WriteLine("No value for DaysSinceLastLogin");
             else
