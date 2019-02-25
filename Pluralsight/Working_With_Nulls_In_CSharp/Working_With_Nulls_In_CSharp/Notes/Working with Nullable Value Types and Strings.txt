@@ -28,3 +28,30 @@ REFERENCE AND VALUE TYPES OVERVIEW
 		-The reference POINTS TO the information
 		-Reference may point to "nothing" (null)
 		-Null checking code may be required
+
+
+NULLABLE<T>
+	A nullable type can represent the correct range of values for its underlying value
+		type AND an andditional null value.
+
+		Ex. Value Type of Bool: {True, False}
+			Nullable<Bool>:		{True, False, null}
+			The value type of bool gets "wrapped" with a nullable
+
+	Nullable<T> = T?
+
+	Default value of Nullable<T> = null
+
+STRINGS
+	Strings are reference types - this is why you can set them to null (or empty)
+
+		string name =
+			"Sarah"; // reference type
+			null;
+			"";		// empty
+			"    "; // whitespace
+
+	string.IsNullOrEmpty(myString)
+	// will also return true if string is empty, not just null or white space
+	string.IsNullOrWhiteSpace(myString)
+		
