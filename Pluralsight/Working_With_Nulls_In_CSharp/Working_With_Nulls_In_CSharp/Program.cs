@@ -6,13 +6,20 @@ namespace Working_With_Nulls_In_CSharp
     {
         static void Main(string[] args)
         {
-            var player = new PlayerCharacter();
-            player.Name = "Sarah";
-            player.DaysSinceLastLogin = 42;
 
-            PlayerDisplayer.Write(player);
+            PlayerCharacter player = new PlayerCharacter();
+            player.DaysSinceLastLogin = 42;
+            // use null conditional operator
+            // if player not null, go into its property
+            int days = player?.DaysSinceLastLogin ?? -1;
+            Console.WriteLine(days);
+
+            PlayerCharacter playerTwo = null;
+            days = playerTwo?.DaysSinceLastLogin ?? -1;
+            Console.WriteLine(days);
 
             Console.ReadLine();
         }
     }
 }
+

@@ -1,1 +1,53 @@
-﻿
+﻿MORE ON NULLABLE<T>
+	// false if null, true if valid value
+	.HasValue
+
+	 // gets underlying value (or throws exception if null)
+	.Value
+
+	// underlying value or default of the value for that Type
+	.GetValueOrDefault() 
+		ex: if T = int
+			0 = default
+	
+	// value or your owns specified default value
+	.GetValueOrDefault(default)
+
+NULLABLE<T> IMPLICIT AND EXPLICIT CONVERSIONS
+	int i = 42;
+	int? j = i; // no epxlicit cast required
+
+	int? j = 42;
+	int i = (int)j;
+
+
+OVERVIEW OF C# NULL-CHECKING OPERATORS
+	Conditional Operator
+		?:
+			if specified expression evalues to true
+				use some value
+			else
+				use another value
+
+		Wasn't designed to work with null values
+
+	Null-Coalescing Operator
+		??
+
+			if object not null
+				use value
+			else
+				let me specify a default value
+
+		Was designed to work with null values
+
+		Works well with arrays 
+
+	Null-Conditional Operator
+		?. ?[
+
+		Easily evaluate wether props are null
+		Can chain null conditional operators w/out having to write
+			as many if-statements
+
+		Works with arrays of values

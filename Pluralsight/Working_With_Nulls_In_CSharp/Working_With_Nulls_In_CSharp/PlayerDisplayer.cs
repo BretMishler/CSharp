@@ -36,16 +36,28 @@ namespace Working_With_Nulls_In_CSharp
             #endregion
 
             #region Nullable<T> Technique (better)
-            if (player.DaysSinceLastLogin == null)
-                Console.WriteLine("No value for DaysSinceLastLogin");
-            else
-                Console.WriteLine(player.DaysSinceLastLogin);
+
+
+
+            //if (player.DaysSinceLastLogin.HasValue)
+            //    Console.WriteLine(player.DaysSinceLastLogin.Value);
+            //else
+            //    Console.WriteLine("No value for DaysSinceLastLogin");
+
+            //int days = player.DaysSinceLastLogin.GetValueOrDefault(-1);
+
+            //int days = player.DaysSinceLastLogin.HasValue ? player.DaysSinceLastLogin.Value : -1;
+
+            int days = player.DaysSinceLastLogin ?? -1;
+
+            Console.WriteLine($"{days} days since last login");
 
             // choosing an arbitrary value -- this time a constant
             if (player.DateOfBirth == null)
                 Console.WriteLine("No DateOfBirth specified");
             else
                 Console.WriteLine(player.DateOfBirth);
+
             #endregion
 
             if (player.IsNoob == null)
