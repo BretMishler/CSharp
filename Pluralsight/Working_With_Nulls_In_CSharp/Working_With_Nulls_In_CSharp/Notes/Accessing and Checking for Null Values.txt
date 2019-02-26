@@ -50,4 +50,27 @@ OVERVIEW OF C# NULL-CHECKING OPERATORS
 		Can chain null conditional operators w/out having to write
 			as many if-statements
 
-		Works with arrays of values
+		Works well with arrays of values
+			To use the null-conditional operator to reference an array element
+
+				object?[n].?property
+
+				// this wont throw a null ref exception, even if object[n] or the property at object[n] is null
+				// AND it wont even throw a null ref exception if the array itself is null, ex:
+					// MyObject[] object = null;
+
+
+THREAD-SAFE NULL DELEGATE INVOCATION
+	Goal: invoke a delegate in a thread-safe way and also ensure that we're not
+		invoking a null delegate:
+
+		Pre C# 6 example
+			PropertyChangedEventHandler eventHandler = PropertyChanged;
+			if (eventHandler != null)
+			{
+				eventHandler(this, new PropertyChangedEventArgs(...));
+			}
+
+		Post C# 6 Example
+
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(...));
