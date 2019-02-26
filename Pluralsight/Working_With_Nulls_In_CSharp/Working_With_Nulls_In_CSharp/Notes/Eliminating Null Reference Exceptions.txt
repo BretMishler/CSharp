@@ -1,0 +1,18 @@
+﻿THE NULL OBJECT PATTERN
+	A software design pattern that uses object-orientation to remove
+	or reduce the amoutn of null references and thus reduce the burden
+	of repetitive null checking and handling code in specific parts
+	of the codebase.
+
+	Pros:
+		Happier end users
+			-reduce instances of null runtime errors
+		Happier developers
+			-reduce time writing repetitive null checking code
+			-simplify test code
+			-fewer branches in program control flow
+			-reduce maintenance overheads: "do nothing" code exists in one centralized place
+
+	Client Code can treat null objects and "real" objects the same way
+
+

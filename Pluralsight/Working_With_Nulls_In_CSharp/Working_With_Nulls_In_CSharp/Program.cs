@@ -1,4 +1,5 @@
 ﻿using System;
+using Working_With_Nulls_In_CSharp.NullObjectPattern;
 
 namespace Working_With_Nulls_In_CSharp
 {
@@ -7,34 +8,63 @@ namespace Working_With_Nulls_In_CSharp
         static void Main(string[] args)
         {
 
-            PlayerCharacter player = new PlayerCharacter();
-            player.DaysSinceLastLogin = 42;
-            // use null conditional operator
-            // if player not null, go into its property
-            int days = player?.DaysSinceLastLogin ?? -1;
-            Console.WriteLine(days);
+            #region Working With Null Ref Values
 
-            PlayerCharacter playerTwo = null;
-            days = playerTwo?.DaysSinceLastLogin ?? -1;
-            Console.WriteLine(days);
+            //PlayerCharacter player = new PlayerCharacter();
+            //player.DaysSinceLastLogin = 42;
+            //// use null conditional operator
+            //// if player not null, go into its property
+            //int days = player?.DaysSinceLastLogin ?? -1;
+            //Console.WriteLine(days);
+
+            //PlayerCharacter playerTwo = null;
+            //days = playerTwo?.DaysSinceLastLogin ?? -1;
+            //Console.WriteLine(days);
 
 
-            PlayerCharacter[] players = new PlayerCharacter[3]
+            //PlayerCharacter[] players = new PlayerCharacter[3]
+            //{
+            //    new PlayerCharacter {Name = "Sarah"},
+            //    new PlayerCharacter(), // Name = null
+            //    null //
+            //};
+
+            //// PlayerCharacter[] players = null;
+
+            //// ?[ is accessing the element
+            //// ?. is accessing the property
+            //string p1 = players?[0]?.Name;
+            //string p2 = players?[1]?.Name;
+            //string p3 = players?[2]?.Name;
+            //Console.ReadLine();
+
+            #endregion
+
+            #region Null Object Pattern
+
+            PlayerCharacterNullPattern sarah = new PlayerCharacterNullPattern(new DiamondSkinDefence())
             {
-                new PlayerCharacter {Name = "Sarah"},
-                new PlayerCharacter(), // Name = null
-                null //
+                Name = "Sarah"
             };
 
-            // PlayerCharacter[] players = null;
+            PlayerCharacterNullPattern amrit = new PlayerCharacterNullPattern(new IronBonesDefence())
+            {
+                Name = "Amrit"
+            };
 
-            // ?[ is accessing the element
-            // ?. is accessing the property
-            string p1 = players?[0]?.Name;
-            string p2 = players?[1]?.Name;
-            string p3 = players?[2]?.Name;
+            PlayerCharacterNullPattern gentry = new PlayerCharacterNullPattern(null)
+            {
+                Name = "Gentry"
+            };
+
+            sarah.Hit(10);
+            amrit.Hit(10);
+            gentry.Hit(10);
 
             Console.ReadLine();
+
+            #endregion
+
         }
     }
 }
