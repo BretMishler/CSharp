@@ -52,7 +52,7 @@ namespace Working_With_Nulls_In_CSharp
                 Name = "Amrit"
             };
 
-            PlayerCharacterNullPattern gentry = new PlayerCharacterNullPattern(null)
+            PlayerCharacterNullPattern gentry = new PlayerCharacterNullPattern(SpecialDefence.Null)
             {
                 Name = "Gentry"
             };

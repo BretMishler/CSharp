@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Working_With_Nulls_In_CSharp.NullObjectPattern
 {
-    public class IronBonesDefence : SpecialDefence
+    class NullDefence : SpecialDefence
     {
         public override int CalculateDamageReduction(int totalDamage)
         {
-            return 5;
+            return 0; // no operation / "do nothing" behavior
         }
     }
 }
