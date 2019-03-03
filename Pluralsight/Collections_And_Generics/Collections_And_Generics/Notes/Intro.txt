@@ -1,0 +1,13 @@
+﻿Collection
+	A class that provides in-memory management of a group
+		of items
+
+	Kinds of Collections
+		Lists
+			-Manage a group of things
+			-Retrieve an element by index
+			-
+
+		Dictionaries
+			-Manage a group of things
+			-Retrieve an element with a key
