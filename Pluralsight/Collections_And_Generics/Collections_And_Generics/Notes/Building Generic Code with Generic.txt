@@ -1,0 +1,4 @@
+﻿GENERICS
+	-Write code without specifying data types
+	-Type-safe
+	-A way to make code generic
