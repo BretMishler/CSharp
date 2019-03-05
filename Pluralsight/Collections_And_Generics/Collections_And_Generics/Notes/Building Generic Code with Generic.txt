@@ -2,3 +2,94 @@
 	-Write code without specifying data types
 	-Type-safe
 	-A way to make code generic
+	-build reusable, type neutral classes
+	-use T as the type parameter for classes with one type parameter
+
+GENERIC METHOD
+	-use generics to build reusable, type-neutral methods
+	-use T as the type parameter for methods with one type parameter
+	-prefix descriptive type pameter names with T
+
+	public TReturn RetVal<TReturn, TParameter>(string sql, TParameter, sqlParameter)
+
+GENERIC CONSTRAIN
+	Generic Constraint		Constraints T To
+	where T : struct	-	value type
+	where T : class		-	reference type
+	where T : new()		-	type with parameterless constructor
+	where T : Example	-	Be or derive from Example
+	where T : IExample	-	Be or implement the IExmaple
+
+	Exmaple
+		// class -restrict to only ref types
+		// new - new instance of object in method
+			// so object my have public parameterless constructor
+		public T Populate<T>(string sql) where T : class, new()
+		{
+			T instance = new T();
+			// Code here to populate an object
+			return instance;
+		}
+		
+GENERIC TYPE PARAMETER
+	A placeholder for the specific type
+	Defined as part of a class signature
+										___
+		Ex. public class OperationResult<T>		
+		
+	or as part of a method signature
+								  ___
+		Ex. public T RetrieveValue<T>(string sql, T defaultValue)
+
+DEFINE
+	public class OperationResult<T>
+											 ________	
+	var operationResult = new OperationResult<decimal>();
+											  ____	
+	var operationResult = new OperationResult<bool>();
+
+
+GENERIC LIST
+	Array:
+		Strongly Typed
+		Fixed length
+		No ability to add or remove by element name (have to use index)
+		Multi-dimensional
+
+	Generic List:
+		Strongly Typed
+		Expandable
+		Can add, inster, or remove elements
+		One-dimension
+
+
+
+	Avoid removing elements where possible
+
+
+COMMON LISTS IN .NET
+	LinkedList<T>
+		-Liked to element before it and after it in sequence
+		-Insert/remove elements in middle of list
+
+	Queue<T>
+		-Discard element after retrieval
+		-Access elements in same order as they were added
+
+	Stack<T>
+		-Discard element after retrieval
+		-Access last added element first
+
+
+	System.Collections.ObjectModel
+		-Appropriate for a reusable library
+		-ReadOnlyCollection
+		-Observable Collection
+
+	System.Collections.Specialized
+		-Speciality collections
+		-StringCollection
+
+
+	System.Collection.Concurrent
+	-Thread-safe list classes
