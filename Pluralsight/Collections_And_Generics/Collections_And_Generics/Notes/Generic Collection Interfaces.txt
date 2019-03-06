@@ -1,0 +1,64 @@
+﻿IENUMERABLE<T>
+	-Base interface for ALL GENERIC COLLECTIONS
+	-gives a collection ability to be enumerating
+		using FOREACH
+	-it specified one method
+		
+		GetEnumerator
+
+	-when using a collection, we arent calling GetEnumerator
+		directly, we use foreach to iterate over collection.
+
+EXTEND IENUMERABLE<T> WITH
+
+	ICollection<T>
+		-Count
+		-Add
+		-Remove
+
+	EXTEND ICOLLECTION<T> WITH
+		
+		IList<T>
+			-IndexOf
+			-Insert
+			-RemoveAt
+
+			Ex. Array implments:
+				IEnumerable<T> -> ICollection<T> -> IList<T>
+
+			List implements:
+			IEnumerable<T> -> ICollection<T> -> IList<T>
+
+		IDictionary<T,V>
+			-Keys
+			-Values
+			-TryGetValue
+
+			Ex. Dictionary implements
+				IEnumerable<T> -> ICollection<T> -> IDictionary<T,V>
+
+DIFFERENT WAYS TO USE INTERFACE
+	Parameter
+		-The calling code can pass in an instance of any 
+			collection class that implements the interface
+
+	Return Type
+		-The calling code can cast returned value to any
+			collection class that implements the interface
+
+	Class
+		-A custom collection class implements the interface
+
+
+YIELD
+	returns a value immediatley but the invoking method keeps going
+
+
+
+DELEGATE
+	a TYPE that represents a reference to a method with a
+		specific parameter list and return type
+
+	used to pass methods as arguments to other methods
+		
+		vendors.Where(Func<Vendor, bool> predicate);

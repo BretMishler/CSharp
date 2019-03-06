@@ -93,3 +93,67 @@ COMMON LISTS IN .NET
 
 	System.Collection.Concurrent
 	-Thread-safe list classes
+
+
+GENERIC DICTIONARY
+	a strony typed collection of keys and values
+
+	Make a dictionary of objects
+		
+		var vendors = new Dictionary<string, Vendor>();
+		var vendor = new Vendor() {
+			Id = 5,
+			Name = "ABC Corp",
+			Email = "abc@abc.com
+			"
+		};
+		
+		vendors.Add(vendor.name, vendor)
+		...etc..
+
+
+	OR CAN ADD LIKE THIS
+
+		var vendors = new Dictionary<string, Vendor>()
+		{
+			{ "ABC Corp", new Vendor()
+				{ VendorId = 5, Name = "ABC Corp", Email = "abc@abc.com"}},
+			{ "XYZ Inc", new Vendor()
+				{ VendorId = 8, Name = "XYZ Inc", Email = "xyz@xyz.com"}}
+		};
+
+
+	Access it
+		Vendor vendor
+		vendors.TryGetValue("XYZ", out vendor)
+
+
+	Avoid
+		-retrieving elements by key if you are not sure they key is valid
+			-use ContainsKey or TryGetValue
+		-retrieving elements by key when you need all elements
+			-iterate through instead
+
+	Common C# Dictionaries by Namespace
+		System.Collections.Generic
+			Dictionary<TKey, TValue>
+				-Use most often
+				-Not sorted
+			SortedList<TKey, TValue>
+				-Sorted by key
+				-Faster when populating from sorted data
+			SortedDictionary<Tkey, TValue>
+				-Sorted by key
+				-Faster when populating from unsorted data
+
+		System.Collections.ObjectModel
+			-Appropriate for a reusable library
+			-ReadOnlyDictionary
+			-KeyedCollection
+
+		System.Collections.Specialized
+			-Speciality collections
+			-OrderedDictionary
+
+		System.Collections.Concurrent
+			-Thread-safe dictionary classes
